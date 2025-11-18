@@ -120,8 +120,8 @@ const initPKLParticleSystem = async () => {
       console.log('PKL avatar added to scene')
     }
 
-    // Position camera for background effect - closer for landing section
-    const cameraDistance = props.currentSection === 'landing' ? 10 : 12
+    // Position camera for background effect - adjusted to show full sphere
+    const cameraDistance = props.currentSection === 'landing' ? 15 : 17 // Increased distance to show full sphere
     scene.camera.position.set(0, 0, cameraDistance)
     scene.camera.lookAt(0, 0, 0)
     console.log(`Camera positioned at z=${cameraDistance}`)
@@ -195,11 +195,19 @@ const initPKLParticleSystem = async () => {
 
     animate()
 
-    // Form PKL initially
+    // Form PKL initially, then start orbiting
     setTimeout(() => {
       if (pklAvatar) {
         console.log('Forming PKL avatar initially')
         pklAvatar.formAvatar(2000)
+
+        // After formation, start orbital animation
+        setTimeout(() => {
+          if (pklAvatar) {
+            console.log('Starting orbital animation')
+            pklAvatar.startOrbiting()
+          }
+        }, 2500) // Start orbiting 2.5 seconds after formation begins
       }
     }, 500)
 
@@ -236,25 +244,19 @@ const cleanup = () => {
 watch(() => props.currentSection, (newSection, oldSection) => {
   if (!pklAvatar) return
 
-  // Different behaviors for different sections
-  switch (newSection) {
-    case 'landing':
+  // Stop orbital motion and smoothly transition back to initial shape
+  pklAvatar.stopOrbiting()
+
+  pklAvatar.disperseParticles()
+
+  // Smooth transition back to initial shape, then restart orbital motion
+  setTimeout(() => {
+    if (pklAvatar) {
       pklAvatar.formAvatar(1500)
-      break
-    case 'projects':
-      // More dynamic movement for projects
-      pklAvatar.disperseParticles()
-      setTimeout(() => pklAvatar?.formAvatar(1000), 500)
-      break
-    case 'skills':
-      // Pulsing effect for skills
-      pklAvatar.formAvatar(800)
-      break
-    case 'contact':
-      // Stable form for contact
-      pklAvatar.formAvatar(1200)
-      break
-  }
+      // Restart orbital motion after formation
+      setTimeout(() => pklAvatar?.startOrbiting(), 2000)
+    }
+  }, 300) // Small delay for smooth transition
 })
 
 // Watch for particle system toggle
