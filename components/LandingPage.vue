@@ -60,14 +60,14 @@
     </div>
 
     <!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+    <!-- <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
       <div class="animate-bounce">
         <div class="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
           <div class="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
       <p class="text-xs text-gray-500 mt-2 text-center">Scroll to explore</p>
-    </div>
+    </div> -->
 
     <!-- Background Effects -->
     <div class="absolute inset-0 z-0">

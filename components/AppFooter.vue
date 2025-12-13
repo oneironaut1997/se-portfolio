@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-gray-900 border-t border-gray-800 py-8">
+  <footer class="bg-gray-900/80 backdrop-blur-md border-t border-gray-800 py-8">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Brand Section -->

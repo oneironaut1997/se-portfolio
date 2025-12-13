@@ -35,6 +35,10 @@ const portfolioStore = usePortfolioStore()
 const pklCanvas = ref<HTMLCanvasElement>()
 const canvasContainer = ref<HTMLDivElement>()
 
+// Event handlers
+let handleMouseMove: ((event: MouseEvent) => void) | null = null
+let handleMouseLeave: (() => void) | null = null
+
 // Three.js variables
 let scene: any = null
 let pklAvatar: PKLAvatar | null = null
@@ -42,6 +46,12 @@ let animationFrame: number | null = null
 let mouse = { x: 0, y: 0 }
 let isMouseMoving = false
 let mouseTimeout: number | null = null
+let isFollowingMouse = false
+let isMouseInside = true
+let mouseScaleX = 1
+let mouseScaleY = 1
+let tanHalfFov = Math.tan((75 * Math.PI) / 180 / 2)
+let cameraDistance = 15
 
 const initPKLParticleSystem = async () => {
   console.log('initPKLParticleSystem called, canvas ref:', pklCanvas.value)
@@ -86,6 +96,8 @@ const initPKLParticleSystem = async () => {
         camera.updateProjectionMatrix()
         renderer.setSize(window.innerWidth, window.innerHeight)
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+        mouseScaleX = cameraDistance * tanHalfFov * camera.aspect
+        mouseScaleY = cameraDistance * tanHalfFov
       },
       dispose: () => {
         if (animationFrame) {
@@ -112,6 +124,11 @@ const initPKLParticleSystem = async () => {
     }
 
     // Create PKL avatar with optimized particle count for landing section
+    cameraDistance = props.currentSection === 'landing' ? 15 : 17
+    const fovRad = (75 * Math.PI) / 180
+    tanHalfFov = Math.tan(fovRad / 2)
+    mouseScaleX = cameraDistance * tanHalfFov * camera.aspect
+    mouseScaleY = cameraDistance * tanHalfFov
     const particleCount = props.currentSection === 'landing' ? 2500 : 2000
     console.log(`Creating PKL avatar with ${particleCount} particles`)
     pklAvatar = new PKLAvatar(particleCount)
@@ -121,19 +138,19 @@ const initPKLParticleSystem = async () => {
     }
 
     // Position camera for background effect - adjusted to show full sphere
-    const cameraDistance = props.currentSection === 'landing' ? 15 : 17 // Increased distance to show full sphere
     scene.camera.position.set(0, 0, cameraDistance)
     scene.camera.lookAt(0, 0, 0)
     console.log(`Camera positioned at z=${cameraDistance}`)
 
     // Add mouse interaction
-    const handleMouseMove = (event: MouseEvent) => {
+    handleMouseMove = (event: MouseEvent) => {
       const rect = pklCanvas.value?.getBoundingClientRect()
       if (!rect) return
 
       mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
       mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
 
+      isMouseInside = true
       isMouseMoving = true
 
       // Clear existing timeout
@@ -147,7 +164,12 @@ const initPKLParticleSystem = async () => {
       }, 100)
     }
 
+    handleMouseLeave = () => {
+      isMouseInside = false
+    }
+
     window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mouseleave', handleMouseLeave)
 
     // Animation loop
     const animate = () => {
@@ -186,7 +208,28 @@ const initPKLParticleSystem = async () => {
           pklAvatar.particles.rotation.x += 0.001
         }
       }
-
+    
+      if (isFollowingMouse && pklAvatar && pklAvatar.mesh) {
+        const targetX = isMouseInside ? mouse.x * mouseScaleX : 0
+        const targetY = isMouseInside ? mouse.y * mouseScaleY : 0
+        const targetZ = 0
+        const lerpFactor = 0.02
+        const dx = (targetX - pklAvatar.mesh.position.x) * lerpFactor
+        const dy = (targetY - pklAvatar.mesh.position.y) * lerpFactor
+        const dz = (targetZ - pklAvatar.mesh.position.z) * lerpFactor
+        pklAvatar.mesh.position.x += dx
+        pklAvatar.mesh.position.y += dy
+        pklAvatar.mesh.position.z += dz
+        // Move all particles
+        for (let i = 0; i < pklAvatar.count; i++) {
+          const i3 = i * 3
+          pklAvatar.positions[i3] += dx
+          pklAvatar.positions[i3 + 1] += dy
+          pklAvatar.positions[i3 + 2] += dz
+        }
+        pklAvatar.geometry.attributes.position.needsUpdate = true
+      }
+    
       if (scene.renderer && scene.scene && scene.camera) {
         scene.renderer.render(scene.scene, scene.camera)
       }
@@ -206,6 +249,7 @@ const initPKLParticleSystem = async () => {
           if (pklAvatar) {
             console.log('Starting orbital animation')
             pklAvatar.startOrbiting()
+            isFollowingMouse = true
           }
         }, 2500) // Start orbiting 2.5 seconds after formation begins
       }
@@ -223,6 +267,15 @@ const initPKLParticleSystem = async () => {
 }
 
 const cleanup = () => {
+  isFollowingMouse = false
+  if (handleMouseMove) {
+    window.removeEventListener('mousemove', handleMouseMove)
+    handleMouseMove = null
+  }
+  if (handleMouseLeave) {
+    window.removeEventListener('mouseleave', handleMouseLeave)
+    handleMouseLeave = null
+  }
   if (animationFrame) {
     cancelAnimationFrame(animationFrame)
   }
@@ -244,19 +297,24 @@ const cleanup = () => {
 watch(() => props.currentSection, (newSection, oldSection) => {
   if (!pklAvatar) return
 
+  isFollowingMouse = false
+
   // Stop orbital motion and smoothly transition back to initial shape
   pklAvatar.stopOrbiting()
 
   pklAvatar.disperseParticles()
 
   // Smooth transition back to initial shape, then restart orbital motion
-  setTimeout(() => {
+  // setTimeout(() => {
     if (pklAvatar) {
       pklAvatar.formAvatar(1500)
       // Restart orbital motion after formation
-      setTimeout(() => pklAvatar?.startOrbiting(), 2000)
+      setTimeout(() => {
+        pklAvatar?.startOrbiting()
+        isFollowingMouse = true
+      }, 2000)
     }
-  }, 300) // Small delay for smooth transition
+  // }, 300) // Small delay for smooth transition
 })
 
 // Watch for particle system toggle

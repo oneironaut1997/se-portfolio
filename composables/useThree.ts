@@ -178,7 +178,8 @@ export class ParticleSystem {
       size: 0.08,
       transparent: true,
       opacity: 0.9,
-      vertexColors: false
+      vertexColors: false,
+      depthTest: false
     })
 
     this.particles = new THREE.Points(this.geometry, this.material)
@@ -235,6 +236,9 @@ export class PKLAvatar extends ParticleSystem {
   private orbitStartTime: number = 0
   private orbitalTransitionProgress: number = 0
   private isTransitioningToOrbit: boolean = false
+  private isFormingCenter: boolean = false
+  private morphProgressCenter: number = 0
+  private centerTargetPositions: Float32Array
 
   constructor(count: number = 2000) {
     super(count)
@@ -243,6 +247,7 @@ export class PKLAvatar extends ParticleSystem {
     this.orbitSpeeds = new Float32Array(count)
     this.orbitRadii = new Float32Array(count)
     this.orbitOffsets = new Float32Array(count * 3)
+    this.centerTargetPositions = new Float32Array(Math.floor(count * 0.25) * 3)
 
     // Initialize orbital mechanics with truly random paths
     for (let i = 0; i < count; i++) {
@@ -266,26 +271,12 @@ export class PKLAvatar extends ParticleSystem {
 
     let particleIndex = 0
 
-    // Center glowing sphere (25% of particles) - perfect spherical distribution
+    // Center particles start at origin - will form sphere when orbiting
     for (let i = 0; i < centerParticles && particleIndex < this.count; i++) {
       const i3 = particleIndex * 3
-
-      // Use golden angle spiral for uniform spherical distribution
-      const y = 1 - (i / (centerParticles - 1)) * 2 // y goes from 1 to -1
-      const radiusAtY = Math.sqrt(1 - y * y) // radius at y
-
-      // Golden angle increment for uniform distribution
-      const goldenAngle = Math.PI * (3 - Math.sqrt(5)) // ~2.4 radians
-      const theta = goldenAngle * i // azimuthal angle
-
-      // Convert to cartesian coordinates
-      const x = radiusAtY * Math.cos(theta) * centerRadius
-      const z = radiusAtY * Math.sin(theta) * centerRadius
-      const y_coord = y * centerRadius
-
-      this.targetPositions[i3] = x
-      this.targetPositions[i3 + 1] = y_coord
-      this.targetPositions[i3 + 2] = z
+      this.targetPositions[i3] = 0
+      this.targetPositions[i3 + 1] = 0
+      this.targetPositions[i3 + 2] = 0
       particleIndex++
     }
 
@@ -352,6 +343,14 @@ export class PKLAvatar extends ParticleSystem {
         requestAnimationFrame(animate)
       } else {
         this.isForming = false
+        // Set exact positions to target
+        for (let i = 0; i < this.count; i++) {
+          const i3 = i * 3
+          this.positions[i3] = this.targetPositions[i3]!
+          this.positions[i3 + 1] = this.targetPositions[i3 + 1]!
+          this.positions[i3 + 2] = this.targetPositions[i3 + 2]!
+        }
+        this.geometry.attributes.position!.needsUpdate = true
       }
     }
     animate()
@@ -369,6 +368,38 @@ export class PKLAvatar extends ParticleSystem {
       this.orbitalTransitionProgress = 0
     }
     this.orbitStartTime = Date.now()
+
+    // Compute center target positions
+    const centerParticles = Math.floor(this.count * 0.25)
+    const centerRadius = 0.8
+    for (let i = 0; i < centerParticles; i++) {
+      const i3 = i * 3
+      const y = 1 - (i / (centerParticles - 1)) * 2
+      const radiusAtY = Math.sqrt(1 - y * y)
+      const goldenAngle = Math.PI * (3 - Math.sqrt(5))
+      const theta = goldenAngle * i
+      const x = radiusAtY * Math.cos(theta) * centerRadius
+      const z = radiusAtY * Math.sin(theta) * centerRadius
+      const y_coord = y * centerRadius
+      this.centerTargetPositions[i3] = x
+      this.centerTargetPositions[i3 + 1] = y_coord
+      this.centerTargetPositions[i3 + 2] = z
+    }
+
+    // Start forming the center sphere with animation
+    this.isFormingCenter = true
+    this.morphProgressCenter = 0
+    const startTime = Date.now()
+    const animateCenter = () => {
+      const elapsed = Date.now() - startTime
+      this.morphProgressCenter = Math.min(elapsed / 500, 1) // 1 second animation
+      if (this.morphProgressCenter < 1) {
+        requestAnimationFrame(animateCenter)
+      } else {
+        this.isFormingCenter = false
+      }
+    }
+    animateCenter()
   }
 
   stopOrbiting() {
@@ -401,6 +432,15 @@ export class PKLAvatar extends ParticleSystem {
         this.positions[i3]! += (this.targetPositions[i3]! - this.positions[i3]!) * 0.1
         this.positions[i3 + 1]! += (this.targetPositions[i3 + 1]! - this.positions[i3 + 1]!) * 0.1
         this.positions[i3 + 2]! += (this.targetPositions[i3 + 2]! - this.positions[i3 + 2]!) * 0.1
+      }
+    } else if (this.isFormingCenter) {
+      // Interpolate center particles towards target sphere
+      const centerParticles = Math.floor(this.count * 0.25)
+      for (let i = 0; i < centerParticles; i++) {
+        const i3 = i * 3
+        this.positions[i3] = this.positions[i3] * (1 - this.morphProgressCenter) + this.centerTargetPositions[i3] * this.morphProgressCenter
+        this.positions[i3 + 1] = this.positions[i3 + 1] * (1 - this.morphProgressCenter) + this.centerTargetPositions[i3 + 1] * this.morphProgressCenter
+        this.positions[i3 + 2] = this.positions[i3 + 2] * (1 - this.morphProgressCenter) + this.centerTargetPositions[i3 + 2] * this.morphProgressCenter
       }
     } else if (this.isOrbiting) {
       // Handle orbital transition animation

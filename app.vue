@@ -16,6 +16,7 @@
       <main :class="portfolioStore.currentSection === 'landing' ? '' : 'container mx-auto px-4 py-8'">
         <!-- Landing Section -->
         <section
+          id="landing"
           v-show="portfolioStore.currentSection === 'landing'"
           class="h-screen w-full"
         >
@@ -24,6 +25,7 @@
 
         <!-- About Section -->
         <section
+          id="about"
           v-show="portfolioStore.currentSection === 'about'"
           class="min-h-screen py-16"
         >
@@ -32,6 +34,7 @@
 
         <!-- Projects Section -->
         <section
+          id="projects"
           v-show="portfolioStore.currentSection === 'projects'"
           class="min-h-screen py-16"
         >
@@ -40,6 +43,7 @@
 
         <!-- Skills Section -->
         <section
+          id="skills"
           v-show="portfolioStore.currentSection === 'skills'"
           class="min-h-screen py-16"
         >
@@ -48,6 +52,7 @@
 
         <!-- Contact Section -->
         <section
+          id="contact"
           v-show="portfolioStore.currentSection === 'contact'"
           class="min-h-screen py-16"
         >
