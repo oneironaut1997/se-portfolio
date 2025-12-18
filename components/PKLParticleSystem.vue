@@ -247,7 +247,7 @@ const initPKLParticleSystem = async () => {
         // After formation, start orbital animation
         setTimeout(() => {
           if (pklAvatar) {
-            console.log('Starting orbital animation')
+            // console.log('Starting orbital animation')
             pklAvatar.startOrbiting()
             // isFollowingMouse = true
           }

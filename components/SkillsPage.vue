@@ -101,6 +101,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue'
+import * as THREE from 'three'
 import { usePortfolioStore } from '~/stores/portfolio'
 import { useThreeScene, ParticleSystem } from '~/composables/useThree'
 import SkillBar from '~/components/SkillBar.vue'
@@ -120,6 +121,8 @@ const skillsCanvas = ref<HTMLCanvasElement>()
 let scene: any = null
 let skillParticles: ParticleSystem[] = []
 let animationFrame: number | null = null
+let raycaster = new THREE.Raycaster()
+let mouse = new THREE.Vector2()
 
 // Computed properties
 const skillsByCategory = computed(() => {
@@ -144,6 +147,56 @@ const additionalSkills = [
 ]
 
 // Methods
+const onMouseMove = (event: MouseEvent) => {
+  if (!skillsCanvas.value || !scene) return
+
+  const rect = skillsCanvas.value.getBoundingClientRect()
+  mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+  mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+
+  raycaster.setFromCamera(mouse, scene.camera.value)
+
+  // Get mouse position in 3D world space (approximately at z=0 plane)
+  const mouseWorldPos = new THREE.Vector3()
+  raycaster.ray.at(5, mouseWorldPos) // Intersect with plane at z=0
+
+  // Apply repulsion force to nearby particles
+  skillParticles.forEach((particleSystem) => {
+    const positions = particleSystem.positions
+    const velocities = particleSystem.velocities
+    const particleCount = particleSystem.count
+
+    for (let i = 0; i < particleCount; i++) {
+      const i3 = i * 3
+      const particlePos = new THREE.Vector3(
+        positions[i3]!,
+        positions[i3 + 1]!,
+        positions[i3 + 2]!
+      )
+
+      const distance = raycaster.ray.distanceToPoint(particlePos)
+      if (distance < 2.0 && distance > 0.1) { // Repulsion range
+        const repulsionForce = 0.05 / (distance * distance) // Inverse square law
+        const closestPoint = new THREE.Vector3()
+        raycaster.ray.closestPointToPoint(particlePos, closestPoint)
+        const repulsionVector = new THREE.Vector3()
+          .subVectors(particlePos, closestPoint)
+          .normalize()
+          .multiplyScalar(repulsionForce)
+
+        velocities[i3]! += repulsionVector.x
+        velocities[i3 + 1]! += repulsionVector.y
+        velocities[i3 + 2]! += repulsionVector.z
+
+        // Dampen velocities to prevent runaway
+        velocities[i3]! *= 0.95
+        velocities[i3 + 1]! *= 0.95
+        velocities[i3 + 2]! *= 0.95
+      }
+    }
+  })
+}
+
 const getCategoryColor = (category: string): string => {
   const colors: Record<string, string> = {
     frontend: '#3b82f6',
@@ -200,9 +253,15 @@ const initSkillsVisualization = async () => {
       animationFrame = requestAnimationFrame(animate)
     }
 
+    // Add mouse interaction
+    const canvas = skillsCanvas.value
+    if (canvas) {
+      canvas.addEventListener('mousemove', onMouseMove)
+    }
+
     animate()
 
-  } catch (error) {
+   } catch (error) {
     console.warn('Skills visualization initialization failed:', error)
   }
 }
@@ -210,6 +269,10 @@ const initSkillsVisualization = async () => {
 const cleanup = () => {
   if (animationFrame) {
     cancelAnimationFrame(animationFrame)
+  }
+
+  if (skillsCanvas.value) {
+    skillsCanvas.value.removeEventListener('mousemove', onMouseMove)
   }
 
   if (scene && scene.dispose) {

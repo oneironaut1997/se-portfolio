@@ -150,7 +150,7 @@ export class ParticleSystem {
   public geometry: THREE.BufferGeometry
   protected material: THREE.PointsMaterial
   public positions: Float32Array
-  protected velocities: Float32Array
+  public velocities: Float32Array
   public count: number
 
   constructor(count: number = 1000) {
@@ -193,15 +193,25 @@ export class ParticleSystem {
     for (let i = 0; i < this.count; i++) {
       const i3 = i * 3
 
+      // Add some random movement
+      this.velocities[i3]! += (Math.random() - 0.5) * 0.01
+      this.velocities[i3 + 1]! += (Math.random() - 0.5) * 0.01
+      this.velocities[i3 + 2]! += (Math.random() - 0.5) * 0.01
+
       // Update positions based on velocities
-      this.positions[i3] += this.velocities[i3]
-      this.positions[i3 + 1] += this.velocities[i3 + 1]
-      this.positions[i3 + 2] += this.velocities[i3 + 2]
+      this.positions[i3]! += this.velocities[i3]!
+      this.positions[i3 + 1]! += this.velocities[i3 + 1]!
+      this.positions[i3 + 2]! += this.velocities[i3 + 2]!
 
       // Boundary checks and wrapping
-      if (Math.abs(this.positions[i3]!) > 10) this.velocities[i3]! *= -1
-      if (Math.abs(this.positions[i3 + 1]!) > 10) this.velocities[i3 + 1]! *= -1
-      if (Math.abs(this.positions[i3 + 2]!) > 10) this.velocities[i3 + 2]! *= -1
+      if (Math.abs(this.positions[i3]!) > 12) this.velocities[i3]! *= -1
+      if (Math.abs(this.positions[i3 + 1]!) > 12) this.velocities[i3 + 1]! *= -1
+      if (Math.abs(this.positions[i3 + 2]!) > 12) this.velocities[i3 + 2]! *= -1
+
+      // Apply light damping to prevent extreme velocities
+      this.velocities[i3]! *= 0.995
+      this.velocities[i3 + 1]! *= 0.995
+      this.velocities[i3 + 2]! *= 0.995
     }
 
     this.geometry.attributes.position.needsUpdate = true
@@ -220,6 +230,7 @@ export class ParticleSystem {
     this.material.dispose()
   }
 }
+
 
 // PKL avatar particle system
 export class PKLAvatar extends ParticleSystem {

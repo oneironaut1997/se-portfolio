@@ -7,6 +7,7 @@
       :current-section="portfolioStore.currentSection"
     />
 
+
     <!-- Main Content -->
     <div class="relative z-10">
       <!-- Header/Navigation -->
