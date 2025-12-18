@@ -1,4 +1,4 @@
-import { ref, onMounted, onUnmounted, watchEffect, type Ref } from 'vue'
+import { ref, onMounted, onUnmounted, watchEffect, markRaw, type Ref } from 'vue'
 import * as THREE from 'three'
 
 export interface ThreeSceneConfig {
@@ -24,17 +24,10 @@ export function useThreeScene(
   config: ThreeSceneConfig = {}
 ): ThreeSceneReturn {
   const canvas = canvasRef
-  const scene = ref(new THREE.Scene())
+  const scene = ref(markRaw(new THREE.Scene()))
   const camera = ref<THREE.PerspectiveCamera>()
   const renderer = ref<THREE.WebGLRenderer>()
   const animationId = ref<number>()
-
-  // Watch for canvas ref to be available
-  watchEffect(() => {
-    if (canvas.value) {
-      initScene()
-    }
-  })
 
   // Default configuration
   const defaultConfig: Required<ThreeSceneConfig> = {
@@ -51,18 +44,18 @@ export function useThreeScene(
 
     // Create camera
     const aspect = window.innerWidth / window.innerHeight
-    camera.value = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000)
+    camera.value = markRaw(new THREE.PerspectiveCamera(75, aspect, 0.1, 1000))
     camera.value.position.z = 5
 
     // Create renderer
-    renderer.value = new THREE.WebGLRenderer({
+    renderer.value = markRaw(new THREE.WebGLRenderer({
       canvas: canvas.value,
       antialias: defaultConfig.antialias,
       alpha: defaultConfig.alpha,
       powerPreference: defaultConfig.powerPreference,
       stencil: defaultConfig.stencil,
       depth: defaultConfig.depth
-    })
+    }))
 
     renderer.value.setSize(window.innerWidth, window.innerHeight)
     renderer.value.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -74,6 +67,13 @@ export function useThreeScene(
     renderer.value.shadowMap.enabled = true
     renderer.value.shadowMap.type = THREE.PCFSoftShadowMap
   }
+
+  // Watch for canvas ref to be available
+  watchEffect(() => {
+    if (canvas.value) {
+      initScene()
+    }
+  })
 
   const animate = (callback: () => void) => {
     const animateFrame = () => {

@@ -106,6 +106,7 @@ const animationsEnabled = computed(() => portfolioStore.animationsEnabled)
 // Navigation items
 const navItems = [
   { id: 'landing', label: 'Home' },
+  { id: 'about', label: 'About' },
   { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
   { id: 'contact', label: 'Contact' }

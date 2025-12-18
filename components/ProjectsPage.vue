@@ -8,17 +8,17 @@
         </span>
       </h2>
       <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-        A showcase of my recent work combining cutting-edge technologies with creative design
+        A showcase of my recent work combining cutting-edge technologies (WIP)
       </p>
     </div>
 
     <!-- 3D Projects Carousel -->
-    <div class="container mx-auto px-4 mb-16">
+    <!-- <div class="container mx-auto px-4 mb-16">
       <ProjectsCarousel @viewDetails="viewProjectDetails" />
-    </div>
+    </div> -->
 
     <!-- Projects Grid (Fallback/Additional) -->
-    <div class="container mx-auto px-4">
+    <!-- <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
         <ProjectCard
           v-for="project in featuredProjects"
@@ -28,7 +28,6 @@
         />
       </div>
 
-      <!-- View All Projects Button -->
       <div class="text-center mt-12">
         <button class="btn-secondary">
           View All Projects
@@ -37,7 +36,7 @@
           </svg>
         </button>
       </div>
-    </div>
+    </div> -->
 
     <!-- Background Effects -->
     <client-only>

@@ -21,13 +21,7 @@
             <h2 class="text-2xl font-bold text-blue-400 mb-4">My Journey</h2>
             <div class="space-y-4 text-gray-300 leading-relaxed">
               <p>
-                Results-driven Full Stack Developer with 5+ years of experience building enterprise-grade web and mobile applications.
-                Proficient in Laravel, Node.js, Vue.js, Nuxt.js, and Capacitor, with expertise in architecting secure, scalable, and high-performance systems.
-              </p>
-
-              <p>
-                Adept at integrating AI-powered solutions — including chatbots, workflow automation, and prompt engineering — to enhance product intelligence and customer experience.
-                Strong background in database architecture, API design, and DevOps integration, combined with experience leading teams, evaluating developers, and managing project schedules for timely, high-quality delivery.
+                Full Stack Developer with 5+ years of experience delivering enterprise-grade web and mobile applications. Specialized in Laravel-based system architecture, API-driven platforms, and cross-platform applications using Nuxt and Capacitor. Proven experience leading development teams, mentoring engineers, and enforcing best practices to ensure scalable, secure, and maintainable systems. Hands-on experience integrating AI-powered solutions (chatbots, workflow automation, internal tools) to improve operational efficiency and user experience. Strong balance of technical leadership and execution, with a track record of shipping production systems on schedule.
               </p>
 
               <p>
@@ -53,6 +47,18 @@
           <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
             <h2 class="text-2xl font-bold text-green-400 mb-6">Professional Experience</h2>
             <div class="space-y-6">
+              <div class="border-l-2 border-green-400 pl-6 relative">
+                <div class="absolute -left-2 top-0 w-4 h-4 bg-green-400 rounded-full"></div>
+                <h3 class="text-lg font-semibold text-white">Front-End Developer</h3>
+                <p class="text-green-400 font-medium">PRAXXYS Solutions Inc. | March 2020 - May 2021</p>
+                <ul class="mt-2 text-gray-300 text-sm space-y-1">
+                  <li>• Developed responsive and interactive user interfaces using Vue.js, HTML, CSS, and JavaScript.</li>
+                  <li>• Collaborated closely with backend teams to integrate APIs and ensure seamless data flow across applications.</li>
+                  <li>• Translated Figma and UI/UX designs into pixel-accurate, production-ready interfaces.</li>
+                  <li>• Improved user experience and page performance across multiple client-facing platforms.</li>
+                  <li>• Participated in Git-based version control workflows and early CI/CD adoption.</li>
+                </ul>
+              </div>
               <div class="border-l-2 border-blue-400 pl-6 relative">
                 <div class="absolute -left-2 top-0 w-4 h-4 bg-blue-400 rounded-full"></div>
                 <h3 class="text-lg font-semibold text-white">Full Stack Developer</h3>
@@ -68,44 +74,31 @@
                   <li>• Strengthened system security through OAuth2, JWT, and security audits</li>
                 </ul>
               </div>
-
-              <div class="border-l-2 border-purple-400 pl-6 relative">
-                <div class="absolute -left-2 top-0 w-4 h-4 bg-purple-400 rounded-full"></div>
-                <h3 class="text-lg font-semibold text-white">Front-End Developer</h3>
-                <p class="text-purple-400 font-medium">PRAXXYS Solutions Inc. | March 2020 - May 2021</p>
-                <ul class="mt-2 text-gray-300 text-sm space-y-1">
-                  <li>• Developed interactive, responsive user interfaces using Vue.js, HTML, CSS, and JavaScript</li>
-                  <li>• Collaborated with backend developers to integrate APIs and ensure seamless cross-platform communication</li>
-                  <li>• Translated Figma and design concepts into fully functional, pixel-perfect interfaces</li>
-                  <li>• Implemented UX improvements and optimized page load performance across multiple client sites</li>
-                  <li>• Managed version control (Git) and participated in early CI/CD setup for automated deployments</li>
-                </ul>
-              </div>
             </div>
           </div>
 
           <!-- Key Skills -->
           <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
-            <h2 class="text-2xl font-bold text-pink-400 mb-6">Core Competencies</h2>
+            <h2 class="text-2xl font-bold text-pink-400 mb-6">Core Skills</h2>
             <div class="grid grid-cols-2 gap-4">
               <div class="space-y-3">
-                <h4 class="font-semibold text-white">Technologies</h4>
+                <h4 class="font-semibold text-white">Primary Expertise</h4>
                 <div class="space-y-2 text-sm text-gray-300">
                   <div class="flex items-center">
                     <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
-                    Laravel & PHP
+                    Backend: Laravel, PHP, Node.js
                   </div>
                   <div class="flex items-center">
                     <div class="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
-                    Vue.js & Nuxt.js
+                    Frontend: Vue.js, Nuxt.js, TypeScript, JavaScript
                   </div>
                   <div class="flex items-center">
                     <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
-                    Node.js & TypeScript
+                    Mobile: Capacitor, Ionic Framework
                   </div>
                   <div class="flex items-center">
                     <div class="w-2 h-2 bg-pink-400 rounded-full mr-3"></div>
-                    Three.js & WebGL
+                    API Design & Architecture
                   </div>
                 </div>
               </div>
@@ -115,19 +108,19 @@
                 <div class="space-y-2 text-sm text-gray-300">
                   <div class="flex items-center">
                     <div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
-                    AI Integration
+                    AI Integration & Automation
                   </div>
                   <div class="flex items-center">
                     <div class="w-2 h-2 bg-red-400 rounded-full mr-3"></div>
-                    System Architecture
+                    Databases: MySQL, PostgreSQL
                   </div>
                   <div class="flex items-center">
                     <div class="w-2 h-2 bg-indigo-400 rounded-full mr-3"></div>
-                    Team Leadership
+                    Security: OAuth2, JWT, RBAC
                   </div>
                   <div class="flex items-center">
                     <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
-                    Performance Optimization
+                    Testing: PHPUnit, Jest, Playwright, TDD
                   </div>
                 </div>
               </div>
@@ -140,11 +133,11 @@
             <div class="space-y-4">
               <div>
                 <h3 class="text-lg font-semibold text-white">Bachelor of Science in Information Technology</h3>
-                <p class="text-orange-400">Pangasinan State University | 2019</p>
+                <p class="text-orange-400">Pangasinan State University – Lingayen, Pangasinan (2019)</p>
               </div>
               <div>
                 <h3 class="text-lg font-semibold text-white">Drafting Technology</h3>
-                <p class="text-orange-400">Pangasinan School of Arts and Trades | 2015</p>
+                <p class="text-orange-400">Pangasinan School of Arts and Trades – Lingayen, Pangasinan (2015)</p>
               </div>
             </div>
           </div>

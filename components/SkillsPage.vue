@@ -100,7 +100,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue'
 import { usePortfolioStore } from '~/stores/portfolio'
 import { useThreeScene, ParticleSystem } from '~/composables/useThree'
 import SkillBar from '~/components/SkillBar.vue'
@@ -138,9 +138,9 @@ const skillCategories = [
 ]
 
 const additionalSkills = [
-  'Agile Development', 'CI/CD', 'Docker', 'AWS', 'Git', 'REST APIs',
-  'GraphQL', 'WebSockets', 'Progressive Web Apps', 'SEO Optimization',
-  'Performance Optimization', 'Code Review', 'Mentoring', 'Technical Writing'
+  'Tailwind CSS', 'Shadcn UI', 'Responsive Design', 'SPAs', 'PWAs', 'Git-based workflows', 'Code Review',
+  'PHPUnit', 'Jest', 'Playwright', 'TDD', 'RBAC', 'Security Headers', 'CSP', 'Vulnerability Audits',
+  'AI Chatbot Integration', 'Prompt Engineering', 'OAuth2', 'JWT', 'Cloudflare', 'CI/CD'
 ]
 
 // Methods
@@ -155,11 +155,10 @@ const getCategoryColor = (category: string): string => {
 }
 
 const initSkillsVisualization = async () => {
-  if (!skillsCanvas.value) return
 
   try {
     // Initialize Three.js scene
-    scene = useThreeScene({
+    scene = useThreeScene(skillsCanvas, {
       antialias: true,
       alpha: true
     })
@@ -170,8 +169,8 @@ const initSkillsVisualization = async () => {
 
     categories.forEach((category, index) => {
       const particleSystem = new ParticleSystem(200)
-      particleSystem.setColor(colors[index])
-      particleSystem.setSize(0.03)
+      particleSystem.setColor(parseInt(colors[index]!.slice(1), 16))
+      particleSystem.setSize(1.0)
 
       // Position different categories in different areas
       const angle = (index / categories.length) * Math.PI * 2
@@ -182,21 +181,21 @@ const initSkillsVisualization = async () => {
         0
       )
 
-      if (scene.scene) {
-        scene.scene.add(particleSystem.particles)
+      if (scene.scene.value) {
+        scene.scene.value.add(particleSystem.particles)
       }
       skillParticles.push(particleSystem)
     })
 
     // Position camera
-    scene.camera.position.set(0, 0, 8)
-    scene.camera.lookAt(0, 0, 0)
+    scene.camera.value.position.set(0, 0, 8)
+    scene.camera.value.lookAt(0, 0, 0)
 
     // Animation loop
     const animate = () => {
       skillParticles.forEach(particles => particles.update())
-      if (scene.renderer && scene.scene && scene.camera) {
-        scene.renderer.render(scene.scene, scene.camera)
+      if (scene.renderer.value && scene.scene.value && scene.camera.value) {
+        scene.renderer.value.render(scene.scene.value, scene.camera.value)
       }
       animationFrame = requestAnimationFrame(animate)
     }
@@ -223,7 +222,12 @@ const cleanup = () => {
 
 // Lifecycle
 onMounted(() => {
-  initSkillsVisualization()
+  // Watch for canvas to be available (due to client-only)
+  watchEffect(() => {
+    if (skillsCanvas.value) {
+      initSkillsVisualization()
+    }
+  })
 })
 
 onUnmounted(() => {

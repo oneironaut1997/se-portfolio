@@ -54,7 +54,7 @@ let tanHalfFov = Math.tan((75 * Math.PI) / 180 / 2)
 let cameraDistance = 15
 
 const initPKLParticleSystem = async () => {
-  console.log('initPKLParticleSystem called, canvas ref:', pklCanvas.value)
+  // console.log('initPKLParticleSystem called, canvas ref:', pklCanvas.value)
   if (!pklCanvas.value) {
     console.warn('PKL canvas ref not available, retrying in next tick')
     await nextTick()
@@ -65,7 +65,7 @@ const initPKLParticleSystem = async () => {
   }
 
   try {
-    console.log('Initializing PKL particle system...')
+    // console.log('Initializing PKL particle system...')
 
     // Initialize Three.js scene directly (not using useThreeScene composable)
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
@@ -130,17 +130,17 @@ const initPKLParticleSystem = async () => {
     mouseScaleX = cameraDistance * tanHalfFov * camera.aspect
     mouseScaleY = cameraDistance * tanHalfFov
     const particleCount = props.currentSection === 'landing' ? 2500 : 2000
-    console.log(`Creating PKL avatar with ${particleCount} particles`)
+    // console.log(`Creating PKL avatar with ${particleCount} particles`)
     pklAvatar = new PKLAvatar(particleCount)
     if (scene.scene && pklAvatar.mesh) {
       scene.scene.add(pklAvatar.mesh)
-      console.log('PKL avatar added to scene')
+      // console.log('PKL avatar added to scene')
     }
 
     // Position camera for background effect - adjusted to show full sphere
     scene.camera.position.set(0, 0, cameraDistance)
     scene.camera.lookAt(0, 0, 0)
-    console.log(`Camera positioned at z=${cameraDistance}`)
+    // console.log(`Camera positioned at z=${cameraDistance}`)
 
     // Add mouse interaction
     handleMouseMove = (event: MouseEvent) => {
@@ -241,7 +241,7 @@ const initPKLParticleSystem = async () => {
     // Form PKL initially, then start orbiting
     setTimeout(() => {
       if (pklAvatar) {
-        console.log('Forming PKL avatar initially')
+        // console.log('Forming PKL avatar initially')
         pklAvatar.formAvatar(2000)
 
         // After formation, start orbital animation
@@ -249,7 +249,7 @@ const initPKLParticleSystem = async () => {
           if (pklAvatar) {
             console.log('Starting orbital animation')
             pklAvatar.startOrbiting()
-            isFollowingMouse = true
+            // isFollowingMouse = true
           }
         }, 2500) // Start orbiting 2.5 seconds after formation begins
       }
@@ -258,7 +258,7 @@ const initPKLParticleSystem = async () => {
     // Set canvas opacity to visible after initialization
     if (pklCanvas.value) {
       pklCanvas.value.style.opacity = '1'
-      console.log('Canvas opacity set to 1')
+      // console.log('Canvas opacity set to 1')
     }
 
   } catch (error) {
@@ -311,7 +311,7 @@ watch(() => props.currentSection, (newSection, oldSection) => {
       // Restart orbital motion after formation
       setTimeout(() => {
         pklAvatar?.startOrbiting()
-        isFollowingMouse = true
+        // isFollowingMouse = true
       }, 2000)
     }
   // }, 300) // Small delay for smooth transition
@@ -353,9 +353,9 @@ const setupIntersectionObserver = () => {
 
 // Lifecycle
 onMounted(async () => {
-  console.log('PKLParticleSystem mounted')
+  // console.log('PKLParticleSystem mounted')
   await nextTick()
-  console.log('After nextTick, canvas ref:', pklCanvas.value)
+  // console.log('After nextTick, canvas ref:', pklCanvas.value)
   initPKLParticleSystem()
   setupIntersectionObserver()
 })

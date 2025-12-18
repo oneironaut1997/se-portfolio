@@ -97,9 +97,6 @@
                   </span>
                   <span v-else>
                     Send Message
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
                   </span>
                 </button>
               </form>
@@ -155,7 +152,7 @@
                   </div>
                   <div>
                     <p class="text-gray-300 font-medium">Email</p>
-                    <p class="text-gray-400">contact@sherwinestrera.dev</p>
+                    <p class="text-gray-400">se.estrera@gmail.com</p>
                   </div>
                 </div>
 
@@ -190,7 +187,7 @@
             <div class="card">
               <h3 class="text-2xl font-bold text-white mb-6">Connect With Me</h3>
 
-              <div class="grid grid-cols-2 gap-4">
+              <div class="grid grid-cols-3 gap-4">
                 <a
                   v-for="social in socialLinks"
                   :key="social.name"
@@ -254,17 +251,12 @@ const socialLinks = [
   },
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com/in/sherwinestrera',
+    url: 'www.linkedin.com/in/sherwin-estrera-95601b242',
     icon: 'IconLinkedin'
   },
   {
-    name: 'Twitter',
-    url: 'https://twitter.com/sherwinestrera',
-    icon: 'IconTwitter'
-  },
-  {
     name: 'Email',
-    url: 'mailto:contact@sherwinestrera.dev',
+    url: 'mailto:contact@se.estrera@gmail.com',
     icon: 'IconMail'
   }
 ]
