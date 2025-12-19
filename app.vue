@@ -8,7 +8,7 @@
     />
 
     <!-- Galaxy Background -->
-    <Galaxy v-if="portfolioStore.backgroundEffect === 'galaxy'" />
+    <Galaxy v-if="portfolioStore.backgroundEffect === 'galaxy'" :hyperspeed-preset="'one'" />
 
     <!-- Splash Cursor Effect -->
     <SplashCursor />

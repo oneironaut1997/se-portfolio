@@ -78,11 +78,6 @@
       <p class="text-xs text-gray-500 mt-2 text-center">Scroll to explore</p>
     </div> -->
 
-    <!-- Background Effects -->
-    <div class="absolute inset-0 z-0">
-      <!-- Gradient Background -->
-      <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20"></div>
-    </div>
   </div>
 </template>
 

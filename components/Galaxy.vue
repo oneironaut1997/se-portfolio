@@ -6,6 +6,8 @@
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
 import { ref, onMounted, onUnmounted, watch } from 'vue';
 import '~/assets/css/galaxy.css';
+import Hyperspeed from '~/components/Hyperspeed.vue';
+import { hyperspeedPresets } from '~/assets/js/hyperspeedPresets';
 
 const vertexShader = `
 attribute vec2 uv;

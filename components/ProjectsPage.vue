@@ -33,20 +33,6 @@
         </button>
       </div>
     </div> -->
-
-    <!-- Background Effects -->
-    <client-only>
-      <div class="absolute inset-0 -z-10 overflow-hidden">
-        <!-- Floating geometric shapes -->
-        <div
-          v-for="i in 8"
-          :key="i"
-          class="absolute opacity-5 animate-float"
-          :class="getShapeClass(i)"
-          :style="getShapeStyle(i)"
-        ></div>
-      </div>
-    </client-only>
   </div>
 </template>
 
@@ -87,32 +73,6 @@ const getShapeClass = (index: number) => {
     'w-18 h-18 bg-cyan-500 rounded-full'
   ]
   return shapes[index % shapes.length]
-}
-
-const getShapeStyle = (index: number) => {
-  const positions = [
-    { top: '10%', left: '10%' },
-    { top: '20%', right: '15%' },
-    { bottom: '30%', left: '20%' },
-    { bottom: '20%', right: '10%' },
-    { top: '60%', left: '80%' },
-    { top: '70%', right: '5%' },
-    { bottom: '10%', left: '70%' },
-    { bottom: '5%', right: '20%' }
-  ]
-
-  const delays = [
-    '0s', '2s', '4s', '1s', '3s', '5s', '2s', '4s'
-  ]
-
-  const position = positions[index % positions.length]
-  const delay = delays[index % delays.length]
-
-  return {
-    ...position,
-    animationDelay: delay,
-    animationDuration: '20s'
-  }
 }
 </script>
 
