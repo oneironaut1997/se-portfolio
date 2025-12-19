@@ -183,5 +183,18 @@ watch([currentCharIndex, displayedText, isDeleting, currentTextIndex], () => {
 </script>
 
 <style scoped>
-/* Add any scoped styles if needed */
+.text-type {
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+.text-type__cursor {
+  margin-left: 0.25rem;
+  display: inline-block;
+  opacity: 1;
+}
+
+.text-type__cursor--hidden {
+  display: none;
+}
 </style>
