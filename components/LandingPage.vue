@@ -6,7 +6,7 @@
       <div class="space-y-6">
         <TextType
           as="h1"
-          :text="['Sherwin Estrera']"
+          :text="['Sherwin ', 'Estrera']"
           :typingSpeed="100"
           :pauseDuration="500"
           :loop="false"
