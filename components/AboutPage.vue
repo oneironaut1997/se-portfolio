@@ -8,6 +8,7 @@
           className="text-4xl md:text-6xl font-bold mb-6"
           spanClass="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
           textColor="transparent"
+          :flex="false"
           weight
           italic
           alpha
