@@ -6,10 +6,12 @@
       <div class="space-y-6">
         <TextType
           as="h1"
-          :text="['Sherwin ', 'Estrera']"
+          :text="['Sherwin Estrera']"
           :typingSpeed="100"
           :pauseDuration="500"
           :loop="false"
+          :typoProbability="0.1"
+          :typoCorrectionDelay="200"
           class="text-5xl md:text-7xl lg:text-8xl font-bold animate-fade-in-up"
         >
           <template #content="{ text, index }">

@@ -46,6 +46,8 @@ interface Props {
   onSentenceComplete?: (sentence: string, index: number) => void
   startOnVisible?: boolean
   reverseMode?: boolean
+  typoProbability?: number
+  typoCorrectionDelay?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -64,6 +66,8 @@ const props = withDefaults(defineProps<Props>(), {
   textColors: () => [],
   startOnVisible: false,
   reverseMode: false,
+  typoProbability: 0,
+  typoCorrectionDelay: 100,
 })
 
 const displayedText = ref('')
@@ -72,6 +76,7 @@ const isDeleting = ref(false)
 const currentTextIndex = ref(0)
 const isVisible = ref(!props.startOnVisible)
 const isComplete = ref(false)
+const isCorrectingTypo = ref(false)
 const cursorRef = ref<HTMLElement>()
 const containerRef = ref<HTMLElement>()
 
@@ -81,6 +86,11 @@ const getRandomSpeed = () => {
   if (!props.variableSpeed) return props.typingSpeed
   const { min, max } = props.variableSpeed
   return Math.random() * (max - min) + min
+}
+
+const getRandomChar = () => {
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()'
+  return chars[Math.floor(Math.random() * chars.length)]
 }
 
 const getCurrentTextColor = () => {
@@ -122,10 +132,27 @@ const executeTypingAnimation = () => {
     }
   } else {
     if (currentCharIndex.value < processedText.length) {
+      const correctChar = processedText[currentCharIndex.value]
+      const shouldTypo = !isCorrectingTypo.value && Math.random() < props.typoProbability
+      const charToType = shouldTypo ? getRandomChar() : correctChar
+
       timeout = setTimeout(
         () => {
-          displayedText.value += processedText[currentCharIndex.value]
-          currentCharIndex.value++
+          displayedText.value += charToType
+          if (shouldTypo) {
+            isCorrectingTypo.value = true
+            // Backspace and type correct after delay
+            setTimeout(() => {
+              displayedText.value = displayedText.value.slice(0, -1)
+              setTimeout(() => {
+                displayedText.value += correctChar
+                currentCharIndex.value++
+                isCorrectingTypo.value = false
+              }, props.typoCorrectionDelay)
+            }, props.typoCorrectionDelay)
+          } else {
+            currentCharIndex.value++
+          }
         },
         props.variableSpeed ? getRandomSpeed() : props.typingSpeed
       )
