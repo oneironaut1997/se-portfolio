@@ -4,7 +4,7 @@ An immersive portfolio website showcasing full-stack development skills with 3D 
 
 ## Features
 
-- **Typing Animation**: Dynamic typing effect on the main header text for an engaging landing experience
+- **Interactive Text Effects**: Dynamic font variations on mouse proximity for headings (used on Landing and About pages)
 - **3D Particle Systems**: Interactive background particle effects powered by Three.js
 - **AI Chat Interface**: Integrated OpenAI-powered assistant for portfolio interaction
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
@@ -26,7 +26,9 @@ An immersive portfolio website showcasing full-stack development skills with 3D 
 se/
 ├── components/          # Vue components
 │   ├── ParticleSystem.vue # Background particles
-│   └── PKLParticleSystem.vue # PKL avatar particles
+│   ├── PKLParticleSystem.vue # PKL avatar particles
+│   ├── TextPressure.vue # Interactive text effect component
+│   └── TextType.vue     # Alternative text component
 ├── composables/         # Vue composables
 │   ├── useThree.ts      # Three.js utilities and classes
 │   ├── useOpenAI.ts     # AI chat functionality

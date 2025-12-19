@@ -3,11 +3,15 @@
     <div class="container mx-auto px-4">
       <!-- Hero Section -->
       <div class="text-center mb-16">
-        <h1 class="text-4xl md:text-6xl font-bold mb-6">
-          <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-            About Me
-          </span>
-        </h1>
+        <TextPressure
+          text="ABOUT ME"
+          className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+          textColor="transparent"
+          weight
+          italic
+          alpha
+          :minFontSize="36"
+        />
         <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
           Passionate about creating immersive digital experiences that blend cutting-edge technology with human-centered design.
         </p>
@@ -188,6 +192,7 @@
 
 <script setup lang="ts">
 import { usePortfolioStore } from '~/stores/portfolio'
+import TextPressure from '~/components/TextPressure.vue'
 
 // Store
 const portfolioStore = usePortfolioStore()
