@@ -194,6 +194,7 @@ interface GalaxyProps {
   repulsionStrength?: number;
   autoCenterRepulsion?: number;
   transparent?: boolean;
+  hyperspeedPreset?: keyof typeof hyperspeedPresets;
 }
 
 const props = withDefaults(defineProps<GalaxyProps>(), {
