@@ -141,15 +141,16 @@ const executeTypingAnimation = () => {
           displayedText.value += charToType
           if (shouldTypo) {
             isCorrectingTypo.value = true
-            // Backspace and type correct after delay
+            // Backspace the wrong char
             setTimeout(() => {
               displayedText.value = displayedText.value.slice(0, -1)
+              // Then type correct after delay
               setTimeout(() => {
                 displayedText.value += correctChar
                 currentCharIndex.value++
                 isCorrectingTypo.value = false
               }, props.typoCorrectionDelay)
-            }, props.typoCorrectionDelay)
+            }, props.deletingSpeed)
           } else {
             currentCharIndex.value++
           }
