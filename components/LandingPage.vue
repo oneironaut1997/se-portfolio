@@ -14,11 +14,10 @@
         >
           <template #content="{ text, index }">
             <span
-              :class="index === 0 ? 'block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent' : 'block bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent'"
+              :class="index === 0 ? 'inline bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent' : 'inline bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent'"
             >
               {{ text }}
             </span>
-            <br v-if="index === 0">
           </template>
         </TextType>
 
