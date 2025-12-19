@@ -50,7 +50,8 @@
               <div class="border-l-2 border-green-400 pl-6 relative">
                 <div class="absolute -left-2 top-0 w-4 h-4 bg-green-400 rounded-full"></div>
                 <h3 class="text-lg font-semibold text-white">Front-End Developer</h3>
-                <p class="text-green-400 font-medium">PRAXXYS Solutions Inc. | March 2020 - May 2021</p>
+                <!-- <p class="text-green-400 font-medium">PRAXXYS Solutions Inc. | March 2020 - May 2021</p> -->
+                <p class="text-green-400 font-medium">March 2020 - May 2021</p>
                 <ul class="mt-2 text-gray-300 text-sm space-y-1">
                   <li>• Developed responsive and interactive user interfaces using Vue.js, HTML, CSS, and JavaScript.</li>
                   <li>• Collaborated closely with backend teams to integrate APIs and ensure seamless data flow across applications.</li>
@@ -62,7 +63,8 @@
               <div class="border-l-2 border-blue-400 pl-6 relative">
                 <div class="absolute -left-2 top-0 w-4 h-4 bg-blue-400 rounded-full"></div>
                 <h3 class="text-lg font-semibold text-white">Full Stack Developer</h3>
-                <p class="text-blue-400 font-medium">PRAXXYS Solutions Inc. | June 2021 - August 2025</p>
+                <!-- <p class="text-blue-400 font-medium">PRAXXYS Solutions Inc. | June 2021 - August 2025</p> -->
+                <p class="text-blue-400 font-medium">June 2021 - August 2025</p>
                 <ul class="mt-2 text-gray-300 text-sm space-y-1">
                   <li>• Led backend architecture for enterprise-grade web and mobile applications using Laravel and Node.js</li>
                   <li>• Integrated AI-powered chatbots and automated workflows to enhance user experience and internal efficiency</li>
@@ -152,8 +154,8 @@
             Get a detailed overview of my experience, skills, and qualifications.
           </p>
           <a
-            href="/Sherwin_Malogan_Estrera_Resume_2025.pdf"
-            download="Sherwin_Malogan_Estrera_Resume_2025.pdf"
+            href="/SE_RESUME_2025.pdf"
+            download="SE_RESUME_2025.pdf"
             class="inline-flex items-center bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105"
           >
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
