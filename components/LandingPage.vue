@@ -21,14 +21,16 @@
           </template>
         </TextType>
 
-        <p class="text-xl md:text-2xl text-gray-300 animate-fade-in-up animation-delay-400">
-          Full Stack Developer 
-        </p>
+        <TextPressure
+          text="Full Stack Developer"
+          className="text-2xl md:text-2xl text-gray-300 animate-fade-in-up animation-delay-400"
+          textColor="#d1d5db"
+          width
+          weight
+          italic
+        />
 
-        <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed animate-fade-in-up animation-delay-600">
-          Creating immersive web experiences with cutting-edge technologies.
-        </p>
-      </div>
+        <ShinyText text="Creating immersive web experiences with cutting-edge technologies." className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed animate-fade-in-up animation-delay-600" />      </div>
 
 
       <!-- CTA Buttons -->
@@ -86,6 +88,8 @@
 
 <script setup lang="ts">
 import { usePortfolioStore } from '~/stores/portfolio'
+import TextPressure from './TextPressure.vue'
+import ShinyText from './ShinyText.vue';import TextType from './TextType.vue'
 
 // Store
 const portfolioStore = usePortfolioStore()
