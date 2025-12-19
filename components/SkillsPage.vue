@@ -3,7 +3,7 @@
     <!-- Section Header -->
     <div class="text-center mb-16">
       <h1 class="text-4xl md:text-5xl font-bold mb-4">
-        <TextPressure text="Skills & Expertise" textColor="transparent" className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text" minFontSize={60} />
+        <TextPressure text="Skills & Expertise" textColor="transparent" className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text" :minFontSize="60" />
       </h1>
       <ShinyText text="A comprehensive overview of my technical skills and proficiency levels." className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed" />
     </div>
@@ -219,7 +219,7 @@ const initSkillsVisualization = async () => {
     const colors = ['#3b82f6', '#10b981', '#8b5cf6', '#f59e0b']
 
     categories.forEach((category, index) => {
-      const particleSystem = new ParticleSystem(200)
+      const particleSystem = new ParticleSystem(10)
       particleSystem.setColor(parseInt(colors[index]!.slice(1), 16))
       particleSystem.setSize(1.0)
 

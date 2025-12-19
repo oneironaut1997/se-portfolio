@@ -3,7 +3,7 @@
     <!-- Hero Section -->
     <div class="text-center mb-16">
       <h1 class="text-4xl md:text-5xl mb-4">
-        <TextPressure text="About Me" textColor="transparent" className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text" minFontSize={60} />
+        <TextPressure text="About Me" textColor="transparent" className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text" :minFontSize=60 />
       </h1>
       <ShinyText text="Passionate about creating immersive digital experiences that blend cutting-edge technology with human-centered design." className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed" />
     </div>

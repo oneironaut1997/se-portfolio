@@ -129,7 +129,7 @@ const initPKLParticleSystem = async () => {
     tanHalfFov = Math.tan(fovRad / 2)
     mouseScaleX = cameraDistance * tanHalfFov * camera.aspect
     mouseScaleY = cameraDistance * tanHalfFov
-    const particleCount = props.currentSection === 'landing' ? 2500 : 2000
+    const particleCount = props.currentSection === 'landing' ? 500 : 300
     // console.log(`Creating PKL avatar with ${particleCount} particles`)
     pklAvatar = new PKLAvatar(particleCount)
     if (scene.scene && pklAvatar.mesh) {
