@@ -161,6 +161,13 @@ onMounted(() => {
     )
 
     observer.observe(containerRef.value)
+  } else if (isVisible.value) {
+    // Start animation immediately if visible
+    nextTick(() => {
+      if (currentCharIndex.value === 0 && !isDeleting.value && displayedText.value === '') {
+        timeout = setTimeout(executeTypingAnimation, props.initialDelay)
+      }
+    })
   }
 })
 
