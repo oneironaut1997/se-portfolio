@@ -1,12 +1,6 @@
 import { ref, readonly } from 'vue'
 import OpenAI from 'openai'
 
-// Types
-export interface ChatMessage {
-  role: 'user' | 'assistant' | 'system'
-  content: string
-}
-
 export interface ChatResponse {
   message: string
   usage?: {
