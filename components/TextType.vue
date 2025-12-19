@@ -14,7 +14,7 @@
       </span>
     </slot>
     <span
-      v-if="showCursor"
+      v-if="showCursor && !isComplete"
       ref="cursorRef"
       :class="`text-type__cursor ${cursorClassName} ${shouldHideCursor ? 'text-type__cursor--hidden' : ''}`"
     >
@@ -71,6 +71,7 @@ const currentCharIndex = ref(0)
 const isDeleting = ref(false)
 const currentTextIndex = ref(0)
 const isVisible = ref(!props.startOnVisible)
+const isComplete = ref(false)
 const cursorRef = ref<HTMLElement>()
 const containerRef = ref<HTMLElement>()
 
@@ -103,6 +104,7 @@ const executeTypingAnimation = () => {
     if (displayedText.value === '') {
       isDeleting.value = false
       if (currentTextIndex.value === textArray.value.length - 1 && !props.loop) {
+        isComplete.value = true
         return
       }
 
@@ -128,7 +130,10 @@ const executeTypingAnimation = () => {
         props.variableSpeed ? getRandomSpeed() : props.typingSpeed
       )
     } else if (textArray.value.length >= 1) {
-      if (!props.loop && currentTextIndex.value === textArray.value.length - 1) return
+      if (!props.loop && currentTextIndex.value === textArray.value.length - 1) {
+        isComplete.value = true
+        return
+      }
       timeout = setTimeout(() => {
         isDeleting.value = true
       }, props.pauseDuration)
