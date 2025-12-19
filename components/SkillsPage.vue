@@ -26,7 +26,7 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
               <div v-for="category in skillCategories" :key="category.id" class="flex items-center space-x-2">
                 <div
-                  class="w-3 h-3 rounded-full"
+                  class="w-3 h-3"
                   :style="{ backgroundColor: category.color }"
                 ></div>
                 <span class="text-gray-300 capitalize">{{ category.name }}</span>
@@ -58,20 +58,6 @@
                 :color="getCategoryColor(category.name)"
               />
             </div>
-          </div>
-        </div>
-
-        <!-- Additional Skills -->
-        <div class="mt-16 text-center">
-          <h3 class="text-2xl font-bold text-white mb-8">Additional Expertise</h3>
-          <div class="flex flex-wrap justify-center gap-3">
-            <span
-              v-for="skill in additionalSkills"
-              :key="skill"
-              class="px-4 py-2 bg-gradient-to-r from-gray-700 to-gray-600 text-gray-300 rounded-full text-sm hover:from-gray-600 hover:to-gray-500 transition-all duration-200"
-            >
-              {{ skill }}
-            </span>
           </div>
         </div>
 
@@ -136,12 +122,6 @@ const skillCategories = [
   { id: 'backend', name: 'backend', color: '#10b981' },
   { id: 'tools', name: 'tools', color: '#8b5cf6' },
   { id: 'soft', name: 'soft skills', color: '#f59e0b' }
-]
-
-const additionalSkills = [
-  'Tailwind CSS', 'Shadcn UI', 'Responsive Design', 'SPAs', 'PWAs', 'Git-based workflows', 'Code Review',
-  'PHPUnit', 'Jest', 'Playwright', 'TDD', 'RBAC', 'Security Headers', 'CSP', 'Vulnerability Audits',
-  'AI Chatbot Integration', 'Prompt Engineering', 'OAuth2', 'JWT', 'Cloudflare', 'CI/CD'
 ]
 
 // Methods
