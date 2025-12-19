@@ -16,7 +16,7 @@
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
         <!-- 3D Skills Visualization -->
-        <div class="relative h-96 mb-16 bg-gray-800/30 rounded-2xl overflow-hidden">
+        <div class="relative h-96 mb-16 bg-gray-800/30 rounded-2xl overflow-hidden backdrop-blur-sm">
           <client-only>
             <canvas
               ref="skillsCanvas"

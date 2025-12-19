@@ -7,6 +7,8 @@
       :current-section="portfolioStore.currentSection"
     />
 
+    <!-- Splash Cursor Effect -->
+    <SplashCursor />
 
     <!-- Main Content -->
     <div class="relative z-10">
@@ -121,6 +123,7 @@ import SkillsPage from '~/components/SkillsPage.vue'
 import ContactPage from '~/components/ContactPage.vue'
 import ChatInterface from '~/components/ChatInterface.vue'
 import PKLParticleSystem from '~/components/PKLParticleSystem.vue'
+import SplashCursor from '~/components/SplashCursor.vue'
 
 // Store
 const portfolioStore = usePortfolioStore()

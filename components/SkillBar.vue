@@ -1,5 +1,5 @@
 <template>
-  <div class="skill-bar">
+  <div class="skill-bar backdrop-blur-sm">
     <div class="flex justify-between items-center mb-2">
       <span class="text-gray-300 font-medium">{{ skill.name }}</span>
       <div class="flex items-center space-x-2">

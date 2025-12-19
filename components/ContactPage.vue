@@ -165,7 +165,7 @@
                   </div>
                   <div>
                     <p class="text-gray-300 font-medium">Location</p>
-                    <p class="text-gray-400">Manila, Philippines</p>
+                    <p class="text-gray-400">Quezon City, Philippines</p>
                   </div>
                 </div>
 
