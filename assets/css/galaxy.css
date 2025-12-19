@@ -1,0 +1,39 @@
+/* Galaxy Component Styles */
+
+.galaxy-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.galaxy-container canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Ensure compatibility with existing particle system */
+.galaxy-container + .pkl-particle-system-container {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .galaxy-container {
+    /* Reduce complexity on mobile for performance */
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .galaxy-container {
+    /* Disable animations if user prefers reduced motion */
+    opacity: 0.3;
+  }
+}

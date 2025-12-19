@@ -7,6 +7,9 @@
       :current-section="portfolioStore.currentSection"
     />
 
+    <!-- Galaxy Background -->
+    <Galaxy v-if="portfolioStore.backgroundEffect === 'galaxy'" />
+
     <!-- Splash Cursor Effect -->
     <SplashCursor />
 
@@ -123,6 +126,7 @@ import SkillsPage from '~/components/SkillsPage.vue'
 import ContactPage from '~/components/ContactPage.vue'
 import ChatInterface from '~/components/ChatInterface.vue'
 import PKLParticleSystem from '~/components/PKLParticleSystem.vue'
+import Galaxy from '~/components/Galaxy.vue'
 import SplashCursor from '~/components/SplashCursor.vue'
 
 // Store

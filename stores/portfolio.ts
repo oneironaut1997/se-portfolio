@@ -151,8 +151,9 @@ export const usePortfolioStore = defineStore('portfolio', () => {
   }
 
   const showChat = ref(false)
-  const particleSystemActive = ref(true)
+  const particleSystemActive = ref(false)
   const animationsEnabled = ref(true)
+  const backgroundEffect = ref<'particles' | 'galaxy'>('galaxy')
 
   // Getters
   const featuredProjects = computed(() =>
@@ -224,6 +225,11 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     error.value = errorMessage
   }
 
+  const setBackgroundEffect = (effect: 'particles' | 'galaxy') => {
+    backgroundEffect.value = effect
+    particleSystemActive.value = effect === 'particles'
+  }
+
 
   return {
     // State
@@ -236,6 +242,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     showChat,
     particleSystemActive,
     animationsEnabled,
+    backgroundEffect,
 
     // Getters
     featuredProjects,
@@ -250,6 +257,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     toggleParticles,
     toggleAnimations,
     setLoading,
-    setError
+    setError,
+    setBackgroundEffect
   }
 })
