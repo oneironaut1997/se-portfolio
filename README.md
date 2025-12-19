@@ -4,6 +4,7 @@ An immersive portfolio website showcasing full-stack development skills with 3D 
 
 ## Features
 
+- **Typing Animation**: Dynamic typing effect on the main header text for an engaging landing experience
 - **3D Particle Systems**: Interactive background particle effects powered by Three.js
 - **AI Chat Interface**: Integrated OpenAI-powered assistant for portfolio interaction
 - **Responsive Design**: Mobile-first approach with Tailwind CSS

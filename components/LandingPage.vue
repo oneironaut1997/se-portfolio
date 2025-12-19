@@ -4,14 +4,22 @@
     <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
       <!-- Main Heading -->
       <div class="space-y-6">
-        <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold">
-          <span class="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-fade-in-up">
-            Sherwin
-          </span>
-          <span class="block bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent animate-fade-in-up animation-delay-200">
-            Estrera
-          </span>
-        </h1>
+        <TextType
+          as="h1"
+          :text="['Sherwin', 'Estrera']"
+          :typingSpeed="100"
+          :pauseDuration="500"
+          :loop="false"
+          class="text-5xl md:text-7xl lg:text-8xl font-bold animate-fade-in-up"
+        >
+          <template #content="{ text, index }">
+            <span
+              :class="index === 0 ? 'block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent' : 'block bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent'"
+            >
+              {{ text }}
+            </span>
+          </template>
+        </TextType>
 
         <p class="text-xl md:text-2xl text-gray-300 animate-fade-in-up animation-delay-400">
           Full Stack Developer 
@@ -38,7 +46,7 @@
 
         <button
           @click="navigateTo('contact')"
-          class="btn-secondary text-lg px-8 py-4"
+          class="btn-secondary text-lg px-8 py-4 backdrop-blur-sm"
         >
           Get In Touch
         </button>
