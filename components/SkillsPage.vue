@@ -2,14 +2,10 @@
   <div id="skills" class="relative min-h-screen py-20">
     <!-- Section Header -->
     <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4">
-        <span class="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-          Skills & Expertise
-        </span>
-      </h2>
-      <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-        A comprehensive overview of my technical skills and proficiency levels
-      </p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">
+        <TextPressure text="Skills & Expertise" textColor="transparent" className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text" minFontSize={60} />
+      </h1>
+      <ShinyText text="A comprehensive overview of my technical skills and proficiency levels." className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed" />
     </div>
 
     <!-- Skills Visualization Container -->
@@ -81,7 +77,7 @@
 
         <!-- Call to Action -->
         <div class="text-center mt-16">
-          <p class="text-gray-400 mb-6">
+          <p class="text-gray-300 mb-6">
             Interested in collaborating? Let's discuss how my skills can help bring your project to life.
           </p>
           <button
@@ -105,6 +101,8 @@ import * as THREE from 'three'
 import { usePortfolioStore } from '~/stores/portfolio'
 import { useThreeScene, ParticleSystem } from '~/composables/useThree'
 import SkillBar from '~/components/SkillBar.vue'
+import TextPressure from '~/components/TextPressure.vue'
+import ShinyText from '~/components/ShinyText.vue'
 
 // Emits
 const emit = defineEmits<{

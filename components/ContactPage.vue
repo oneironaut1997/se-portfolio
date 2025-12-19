@@ -2,14 +2,10 @@
   <div id="contact" class="relative min-h-screen py-20">
     <!-- Section Header -->
     <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4">
-        <span class="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-          Get In Touch
-        </span>
-      </h2>
-      <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-        Ready to collaborate? Let's discuss how we can bring your ideas to life together.
-      </p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">
+        <TextPressure text="Get In Touch" textColor="transparent" className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text" minFontSize={60} />
+      </h1>
+      <ShinyText text="Ready to collaborate? Let's discuss how we can bring your ideas to life together." className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed" />
     </div>
 
     <div class="container mx-auto px-4">
@@ -152,7 +148,7 @@
                   </div>
                   <div>
                     <p class="text-gray-300 font-medium">Email</p>
-                    <p class="text-gray-400">se.estrera@gmail.com</p>
+                    <p class="text-gray-300">se.estrera@gmail.com</p>
                   </div>
                 </div>
 
@@ -165,7 +161,7 @@
                   </div>
                   <div>
                     <p class="text-gray-300 font-medium">Location</p>
-                    <p class="text-gray-400">Quezon City, Philippines</p>
+                    <p class="text-gray-300">Quezon City, Philippines</p>
                   </div>
                 </div>
 
@@ -177,7 +173,7 @@
                   </div>
                   <div>
                     <p class="text-gray-300 font-medium">Response Time</p>
-                    <p class="text-gray-400">Within 24 hours</p>
+                    <p class="text-gray-300">Within 24 hours</p>
                   </div>
                 </div>
               </div>
@@ -196,7 +192,7 @@
                   rel="noopener noreferrer"
                   class="flex items-center space-x-3 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-all duration-200 group"
                 >
-                  <component :is="social.icon" class="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-200" />
+                  <component :is="social.icon" class="w-6 h-6 text-gray-300 group-hover:text-white transition-colors duration-200" />
                   <span class="text-gray-300 group-hover:text-white font-medium">{{ social.name }}</span>
                 </a>
               </div>
@@ -209,7 +205,7 @@
                   <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
                   <span class="text-white font-medium">Available for Projects</span>
                 </div>
-                <span class="text-gray-400 text-sm">Open to opportunities</span>
+                <span class="text-gray-300 text-sm">Open to opportunities</span>
               </div>
             </div>
           </div>
@@ -221,6 +217,8 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import TextPressure from '~/components/TextPressure.vue'
+import ShinyText from '~/components/ShinyText.vue'
 
 // Reactive state
 const form = ref({

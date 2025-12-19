@@ -10,7 +10,7 @@
             </div>
             <span class="text-lg font-bold text-white">Sherwin Estrera</span>
           </div>
-          <p class="text-gray-400 text-sm leading-relaxed">
+          <p class="text-gray-300 text-sm leading-relaxed">
             Full Stack Developer  creating immersive web experiences
             with cutting-edge technologies.
           </p>
@@ -21,7 +21,7 @@
               :href="social.url"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-gray-400 hover:text-white transition-colors duration-200"
+              class="text-gray-300 hover:text-white transition-colors duration-200"
               :aria-label="`Visit ${social.name}`"
             >
               <component :is="social.icon" class="w-5 h-5" />
@@ -37,7 +37,7 @@
               v-for="item in navItems"
               :key="item.id"
               @click="navigateTo(item.id)"
-              class="text-gray-400 hover:text-white transition-colors duration-200 text-left text-sm"
+              class="text-gray-300 hover:text-white transition-colors duration-200 text-left text-sm"
             >
               {{ item.label }}
             </button>
@@ -47,7 +47,7 @@
         <!-- Contact Info -->
         <div class="space-y-4">
           <h3 class="text-white font-semibold">Get In Touch</h3>
-          <div class="space-y-2 text-sm text-gray-400">
+          <div class="space-y-2 text-sm text-gray-300">
             <p>Ready to bring your ideas to life?</p>
             <p>Let's create something amazing together.</p>
           </div>
@@ -66,10 +66,10 @@
       <!-- Bottom Section -->
       <div class="mt-8 pt-8 border-t border-gray-800">
         <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-          <p class="text-gray-400 text-sm">
+          <p class="text-gray-300 text-sm">
             © {{ currentYear }} Sherwin Estrera. All rights reserved.
           </p>
-          <div class="flex items-center space-x-6 text-sm text-gray-400">
+          <div class="flex items-center space-x-6 text-sm text-gray-300">
             <button
               @click="toggleParticles"
               class="hover:text-white transition-colors duration-200"

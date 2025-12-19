@@ -8,12 +8,12 @@
         </div>
         <div>
           <h3 class="text-white font-semibold text-sm">P.K.L.</h3>
-          <p class="text-gray-400 text-xs">(Personal Knowledge Link)</p>
+          <p class="text-gray-300 text-xs">(Personal Knowledge Link)</p>
         </div>
       </div>
       <button
         @click="$emit('close')"
-        class="text-gray-400 hover:text-white transition-colors duration-200 p-1"
+        class="text-gray-300 hover:text-white transition-colors duration-200 p-1"
         aria-label="Close chat"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

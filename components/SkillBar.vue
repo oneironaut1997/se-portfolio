@@ -11,7 +11,7 @@
             :class="i <= skill.proficiency ? 'bg-current' : 'bg-gray-600'"
           ></div>
         </div>
-        <span class="text-gray-400 text-sm">{{ skill.proficiency }}/5</span>
+        <span class="text-gray-300 text-sm">{{ skill.proficiency }}/5</span>
       </div>
     </div>
 

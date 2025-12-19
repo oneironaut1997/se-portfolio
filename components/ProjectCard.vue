@@ -15,7 +15,7 @@
           <svg class="w-16 h-16 mx-auto text-gray-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
           </svg>
-          <p class="text-sm text-gray-400">{{ project.title }}</p>
+          <p class="text-sm text-gray-300">{{ project.title }}</p>
         </div>
       </div>
 
@@ -50,7 +50,7 @@
             :href="project.githubUrl"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-gray-400 hover:text-white transition-colors duration-200"
+            class="text-gray-300 hover:text-white transition-colors duration-200"
             @click.stop
             aria-label="View on GitHub"
           >
@@ -63,7 +63,7 @@
             :href="project.demoUrl"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-gray-400 hover:text-white transition-colors duration-200"
+            class="text-gray-300 hover:text-white transition-colors duration-200"
             @click.stop
             aria-label="View live demo"
           >
@@ -74,7 +74,7 @@
         </div>
       </div>
 
-      <p class="text-gray-400 text-sm mb-4 leading-relaxed">
+      <p class="text-gray-300 text-sm mb-4 leading-relaxed">
         {{ project.description }}
       </p>
 

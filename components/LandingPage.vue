@@ -30,8 +30,8 @@
           italic
         />
 
-        <ShinyText text="Creating immersive web experiences with cutting-edge technologies." className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed animate-fade-in-up animation-delay-600" />      </div>
-
+        <ShinyText text="Creating immersive web experiences with cutting-edge technologies." className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed animate-fade-in-up animation-delay-600" />
+      </div>
 
       <!-- CTA Buttons -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12 animate-fade-in-up animation-delay-800">
@@ -88,8 +88,9 @@
 
 <script setup lang="ts">
 import { usePortfolioStore } from '~/stores/portfolio'
-import TextPressure from './TextPressure.vue'
-import ShinyText from './ShinyText.vue';import TextType from './TextType.vue'
+import TextPressure from '~/components/TextPressure.vue'
+import ShinyText from '~/components/ShinyText.vue'
+import TextType from '~/components/TextType.vue'
 
 // Store
 const portfolioStore = usePortfolioStore()

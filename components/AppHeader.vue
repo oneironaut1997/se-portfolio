@@ -32,7 +32,7 @@
         <!-- Mobile Menu Button -->
         <button
           @click="toggleMobileMenu"
-          class="md:hidden p-2 text-gray-400 hover:text-white transition-colors duration-200"
+          class="md:hidden p-2 text-gray-300 hover:text-white transition-colors duration-200"
           :aria-expanded="showMobileMenu"
           aria-label="Toggle navigation menu"
         >

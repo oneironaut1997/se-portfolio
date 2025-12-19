@@ -1,25 +1,15 @@
 <template>
-  <div class="min-h-screen py-20">
-    <div class="container mx-auto px-4">
-      <!-- Hero Section -->
-      <div class="text-center mb-16">
-        <TextPressure
-          text="ABOUT ME"
-          className="text-4xl md:text-6xl font-bold mb-6"
-          spanClass="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
-          textColor="transparent"
-          :flex="false"
-          weight
-          italic
-          alpha
-          :minFontSize="36"
-        />
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-          Passionate about creating immersive digital experiences that blend cutting-edge technology with human-centered design.
-        </p>
-      </div>
+  <div id="about" class="relative min-h-screen py-20">
+    <!-- Hero Section -->
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl mb-4">
+        <TextPressure text="About Me" textColor="transparent" className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text" minFontSize={60} />
+      </h1>
+      <ShinyText text="Passionate about creating immersive digital experiences that blend cutting-edge technology with human-centered design." className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed" />
+    </div>
 
-      <!-- Main Content -->
+    <!-- Main Content -->
+    <div class="container mx-auto px-4">
       <div class="grid lg:grid-cols-2 gap-12 items-start">
         <!-- Personal Story -->
         <div class="space-y-6">
@@ -195,6 +185,7 @@
 <script setup lang="ts">
 import { usePortfolioStore } from '~/stores/portfolio'
 import TextPressure from '~/components/TextPressure.vue'
+import ShinyText from '~/components/ShinyText.vue'
 
 // Store
 const portfolioStore = usePortfolioStore()

@@ -2,14 +2,10 @@
   <div id="projects" class="relative min-h-screen py-20">
     <!-- Section Header -->
     <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4">
-        <span class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-          Featured Projects
-        </span>
-      </h2>
-      <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-        A showcase of my recent work combining cutting-edge technologies (WIP)
-      </p>
+      <h1 class="text-4xl md:text-5xl mb-4">
+        <TextPressure text="Featured Projects" textColor="transparent" className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text" minFontSize={60} />
+      </h1>
+      <ShinyText text="A showcase of my recent work combining cutting-edge technologies (WIP)." className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed" />
     </div>
 
     <!-- 3D Projects Carousel -->
@@ -59,6 +55,8 @@ import { computed } from 'vue'
 import { usePortfolioStore } from '~/stores/portfolio'
 import ProjectCard from '~/components/ProjectCard.vue'
 import ProjectsCarousel from '~/components/ProjectsCarousel.vue'
+import TextPressure from '~/components/TextPressure.vue'
+import ShinyText from '~/components/ShinyText.vue'
 import type { Project } from '~/stores/portfolio'
 
 // Store
