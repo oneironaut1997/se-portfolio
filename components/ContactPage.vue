@@ -13,208 +13,200 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <!-- Contact Form -->
           <div class="space-y-6">
-            <StarBorder class="w-full">
-              <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
-                <h3 class="text-2xl font-bold text-white mb-6">Send a Message</h3>
+            <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
+              <h3 class="text-2xl font-bold text-white mb-6">Send a Message</h3>
 
-                <form @submit.prevent="submitForm" class="space-y-6">
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label for="name" class="block text-sm font-medium text-gray-300 mb-2">
-                        Name *
-                      </label>
-                      <input
-                        id="name"
-                        v-model="form.name"
-                        type="text"
-                        required
-                        class="input-field w-full"
-                        placeholder="Your full name"
-                        :disabled="isSubmitting"
-                      />
-                    </div>
-
-                    <div>
-                      <label for="email" class="block text-sm font-medium text-gray-300 mb-2">
-                        Email *
-                      </label>
-                      <input
-                        id="email"
-                        v-model="form.email"
-                        type="email"
-                        required
-                        class="input-field w-full"
-                        placeholder="your.email@example.com"
-                        :disabled="isSubmitting"
-                      />
-                    </div>
-                  </div>
-
+              <form @submit.prevent="submitForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">
-                      Subject *
+                    <label for="name" class="block text-sm font-medium text-gray-300 mb-2">
+                      Name *
                     </label>
                     <input
-                      id="subject"
-                      v-model="form.subject"
+                      id="name"
+                      v-model="form.name"
                       type="text"
                       required
                       class="input-field w-full"
-                      placeholder="What's this about?"
+                      placeholder="Your full name"
                       :disabled="isSubmitting"
                     />
                   </div>
 
                   <div>
-                    <label for="message" class="block text-sm font-medium text-gray-300 mb-2">
-                      Message *
+                    <label for="email" class="block text-sm font-medium text-gray-300 mb-2">
+                      Email *
                     </label>
-                    <textarea
-                      id="message"
-                      v-model="form.message"
+                    <input
+                      id="email"
+                      v-model="form.email"
+                      type="email"
                       required
-                      rows="6"
-                      class="input-field w-full resize-none"
-                      placeholder="Tell me about your project or idea..."
+                      class="input-field w-full"
+                      placeholder="your.email@example.com"
                       :disabled="isSubmitting"
-                    ></textarea>
+                    />
                   </div>
+                </div>
 
-                  <!-- Submit Button -->
-                  <button
-                    type="submit"
-                    :disabled="!isFormValid || isSubmitting"
-                    class="w-full btn-primary text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
-                  >
-                    <span v-if="isSubmitting">
-                      <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                    </span>
-                    <span v-else>
-                      Send Message
-                    </span>
-                  </button>
-                </form>
+                <div>
+                  <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">
+                    Subject *
+                  </label>
+                  <input
+                    id="subject"
+                    v-model="form.subject"
+                    type="text"
+                    required
+                    class="input-field w-full"
+                    placeholder="What's this about?"
+                    :disabled="isSubmitting"
+                  />
+                </div>
 
-                <!-- Success/Error Messages -->
-                <div v-if="submitStatus" class="mt-6">
-                  <div
-                    :class="[
-                      'p-4 rounded-lg',
-                      submitStatus.type === 'success'
-                        ? 'bg-green-900/50 border border-green-700 text-green-300'
-                        : 'bg-red-900/50 border border-red-700 text-red-300'
-                    ]"
-                  >
-                    <div class="flex items-center space-x-2">
-                      <svg
-                        v-if="submitStatus.type === 'success'"
-                        class="w-5 h-5 text-green-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <svg
-                        v-else
-                        class="w-5 h-5 text-red-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <span>{{ submitStatus.message }}</span>
-                    </div>
+                <div>
+                  <label for="message" class="block text-sm font-medium text-gray-300 mb-2">
+                    Message *
+                  </label>
+                  <textarea
+                    id="message"
+                    v-model="form.message"
+                    required
+                    rows="6"
+                    class="input-field w-full resize-none"
+                    placeholder="Tell me about your project or idea..."
+                    :disabled="isSubmitting"
+                  ></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button
+                  type="submit"
+                  :disabled="!isFormValid || isSubmitting"
+                  class="w-full btn-primary text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                >
+                  <span v-if="isSubmitting">
+                    <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  </span>
+                  <span v-else>
+                    Send Message
+                  </span>
+                </button>
+              </form>
+
+              <!-- Success/Error Messages -->
+              <div v-if="submitStatus" class="mt-6">
+                <div
+                  :class="[
+                    'p-4 rounded-lg',
+                    submitStatus.type === 'success'
+                      ? 'bg-green-900/50 border border-green-700 text-green-300'
+                      : 'bg-red-900/50 border border-red-700 text-red-300'
+                  ]"
+                >
+                  <div class="flex items-center space-x-2">
+                    <svg
+                      v-if="submitStatus.type === 'success'"
+                      class="w-5 h-5 text-green-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <svg
+                      v-else
+                      class="w-5 h-5 text-red-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>{{ submitStatus.message }}</span>
                   </div>
                 </div>
               </div>
-            </StarBorder>
+            </div>
           </div>
 
           <!-- Contact Info & Social -->
           <div class="space-y-6">
             <!-- Contact Information -->
-            <StarBorder class="w-full">
-              <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
-                <h3 class="text-2xl font-bold text-white mb-6">Contact Information</h3>
+            <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
+              <h3 class="text-2xl font-bold text-white mb-6">Contact Information</h3>
 
-                <div class="space-y-4">
-                  <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p class="text-gray-300 font-medium">Email</p>
-                      <p class="text-gray-300">se.estrera@gmail.com</p>
-                    </div>
+              <div class="space-y-4">
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
                   </div>
-
-                  <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p class="text-gray-300 font-medium">Location</p>
-                      <p class="text-gray-300">Quezon City, Philippines</p>
-                    </div>
+                  <div>
+                    <p class="text-gray-300 font-medium">Email</p>
+                    <p class="text-gray-300">se.estrera@gmail.com</p>
                   </div>
+                </div>
 
-                  <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p class="text-gray-300 font-medium">Response Time</p>
-                      <p class="text-gray-300">Within 24 hours</p>
-                    </div>
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-gray-300 font-medium">Location</p>
+                    <p class="text-gray-300">Quezon City, Philippines</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-gray-300 font-medium">Response Time</p>
+                    <p class="text-gray-300">Within 24 hours</p>
                   </div>
                 </div>
               </div>
-            </StarBorder>
+            </div>
 
             <!-- Social Links -->
-            <StarBorder class="w-full">
-              <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
-                <h3 class="text-2xl font-bold text-white mb-6">Connect With Me</h3>
+            <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
+              <h3 class="text-2xl font-bold text-white mb-6">Connect With Me</h3>
 
-                <div class="grid grid-cols-3 gap-4">
-                  <a
-                    v-for="social in socialLinks"
-                    :key="social.name"
-                    :href="social.url"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex items-center justify-center space-x-3 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-all duration-200 group"
-                  >
-                    <span class="text-gray-300 group-hover:text-white font-medium">{{ social.name }}</span>
-                  </a>
-                </div>
+              <div class="grid grid-cols-3 gap-4">
+                <a
+                  v-for="social in socialLinks"
+                  :key="social.name"
+                  :href="social.url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center justify-center space-x-3 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-all duration-200 group"
+                >
+                  <span class="text-gray-300 group-hover:text-white font-medium">{{ social.name }}</span>
+                </a>
               </div>
-            </StarBorder>
+            </div>
 
             <!-- Availability Status -->
-            <StarBorder class="w-full">
-              <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center space-x-3">
-                    <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                    <span class="text-white font-medium">Available for Projects</span>
-                  </div>
-                  <span class="text-gray-300 text-sm">Open to opportunities</span>
+            <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                  <span class="text-white font-medium">Available for Projects</span>
                 </div>
+                <span class="text-gray-300 text-sm">Open to opportunities</span>
               </div>
-            </StarBorder>
+            </div>
           </div>
         </div>
       </div>
@@ -226,7 +218,6 @@
 import { ref, computed } from 'vue'
 import TextPressure from '~/components/TextPressure.vue'
 import ShinyText from '~/components/ShinyText.vue'
-import StarBorder from '~/components/StarBorder.vue'
 
 // Reactive state
 const form = ref({

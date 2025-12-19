@@ -7,7 +7,6 @@ An immersive portfolio website showcasing full-stack development skills with 3D 
 - **Interactive Text Effects**: Dynamic font variations on mouse proximity for headings (used on Landing and About pages)
 - **3D Particle Systems**: Interactive background particle effects powered by Three.js
 - **AI Chat Interface**: Integrated OpenAI-powered assistant for portfolio interaction
-- **Animated Star Borders**: Dynamic star-shaped border animations for card elements using CSS gradients and keyframes
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
 - **Easter Eggs**: Hidden features and voice recognition capabilities
 - **Performance Optimized**: Efficient rendering with proper memory management
@@ -28,7 +27,6 @@ se/
 ├── components/          # Vue components
 │   ├── ParticleSystem.vue # Background particles
 │   ├── PKLParticleSystem.vue # PKL avatar particles
-│   ├── StarBorder.vue   # Animated star border component
 │   ├── TextPressure.vue # Interactive text effect component
 │   └── TextType.vue     # Alternative text component
 ├── composables/         # Vue composables
