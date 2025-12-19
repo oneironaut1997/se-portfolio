@@ -35,21 +35,6 @@
               I believe in creating AI-powered solutions that enhance creativity, streamline workflows, and empower users to achieve more through intelligent automation and thoughtful integration."
             </blockquote>
           </div>
-
-           <!-- Education -->
-           <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
-             <h2 class="text-2xl font-bold text-orange-400 mb-6">Education</h2>
-             <div class="space-y-4">
-               <div>
-                 <h3 class="text-lg font-semibold text-white">Bachelor of Science in Information Technology</h3>
-                 <p class="text-orange-400">Pangasinan State University – Lingayen, Pangasinan (2019)</p>
-               </div>
-               <div>
-                 <h3 class="text-lg font-semibold text-white">Drafting Technology</h3>
-                 <p class="text-orange-400">Pangasinan School of Arts and Trades – Lingayen, Pangasinan (2015)</p>
-               </div>
-             </div>
-           </div>
         </div>
 
         <!-- Professional Highlights -->
@@ -90,52 +75,17 @@
             </div>
           </div>
 
-          <!-- Key Skills -->
+          <!-- Education -->
           <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
-            <h2 class="text-2xl font-bold text-pink-400 mb-6">Core Skills</h2>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="space-y-3">
-                <h4 class="font-semibold text-white">Primary Expertise</h4>
-                <div class="space-y-2 text-sm text-gray-300">
-                  <div class="flex items-center">
-                    <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
-                    Backend: Laravel, PHP, Node.js
-                  </div>
-                  <div class="flex items-center">
-                    <div class="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
-                    Frontend: Vue.js, Nuxt.js, TypeScript, JavaScript
-                  </div>
-                  <div class="flex items-center">
-                    <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
-                    Mobile: Capacitor, Ionic Framework
-                  </div>
-                  <div class="flex items-center">
-                    <div class="w-2 h-2 bg-pink-400 rounded-full mr-3"></div>
-                    API Design & Architecture
-                  </div>
-                </div>
+            <h2 class="text-2xl font-bold text-orange-400 mb-6">Education</h2>
+            <div class="space-y-4">
+              <div>
+                <h3 class="text-lg font-semibold text-white">Bachelor of Science in Information Technology</h3>
+                <p class="text-orange-400">Pangasinan State University – Lingayen, Pangasinan (2019)</p>
               </div>
-
-              <div class="space-y-3">
-                <h4 class="font-semibold text-white">Specializations</h4>
-                <div class="space-y-2 text-sm text-gray-300">
-                  <div class="flex items-center">
-                    <div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
-                    AI Integration & Automation
-                  </div>
-                  <div class="flex items-center">
-                    <div class="w-2 h-2 bg-red-400 rounded-full mr-3"></div>
-                    Databases: MySQL, PostgreSQL
-                  </div>
-                  <div class="flex items-center">
-                    <div class="w-2 h-2 bg-indigo-400 rounded-full mr-3"></div>
-                    Security: OAuth2, JWT, RBAC
-                  </div>
-                  <div class="flex items-center">
-                    <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
-                    Testing: PHPUnit, Jest, Playwright, TDD
-                  </div>
-                </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white">Drafting Technology</h3>
+                <p class="text-orange-400">Pangasinan School of Arts and Trades – Lingayen, Pangasinan (2015)</p>
               </div>
             </div>
           </div>

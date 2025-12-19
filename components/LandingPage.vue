@@ -10,7 +10,7 @@
           :typingSpeed="100"
           :pauseDuration="500"
           :loop="false"
-          class="text-5xl md:text-7xl lg:text-8xl font-bold animate-fade-in-up"
+          class="text-5xl md:text-7xl lg:text-8xl font-bold"
         >
           <template #content="{ text, index }">
             <span
@@ -23,14 +23,14 @@
 
         <TextPressure
           text="Full Stack Developer"
-          className="text-2xl md:text-2xl text-gray-300 animate-fade-in-up animation-delay-400"
+          className="text-2xl md:text-2xl text-gray-300"
           textColor="#d1d5db"
           width
           weight
           italic
         />
 
-        <ShinyText text="Creating immersive web experiences with cutting-edge technologies." className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed animate-fade-in-up animation-delay-600" />
+        <ShinyText text="Creating immersive web experiences with cutting-edge technologies." className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed" />
       </div>
 
       <!-- CTA Buttons -->
