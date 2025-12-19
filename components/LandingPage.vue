@@ -6,7 +6,7 @@
       <div class="space-y-6">
         <TextType
           as="h1"
-          :text="['Sherwin', 'Estrera']"
+          :text="['Sherwin Estrera']"
           :typingSpeed="100"
           :pauseDuration="500"
           :loop="false"
@@ -18,6 +18,7 @@
             >
               {{ text }}
             </span>
+            <br v-if="index === 0">
           </template>
         </TextType>
 
@@ -27,7 +28,6 @@
 
         <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed animate-fade-in-up animation-delay-600">
           Creating immersive web experiences with cutting-edge technologies.
-          Specializing in Vue.js, Three.js, and AI integration for unforgettable digital journeys.
         </p>
       </div>
 
