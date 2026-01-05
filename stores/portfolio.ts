@@ -36,6 +36,7 @@ export type Section = 'landing' | 'about' | 'projects' | 'skills' | 'contact'
 export const usePortfolioStore = defineStore('portfolio', () => {
   // State
   const currentSection = ref<Section>('landing')
+  const previousSection = ref<Section>('landing')
   const isLoading = ref(false)
   const error = ref<string | null>(null)
   const projects = ref<Project[]>([
@@ -154,6 +155,8 @@ export const usePortfolioStore = defineStore('portfolio', () => {
   const particleSystemActive = ref(false)
   const animationsEnabled = ref(true)
   const backgroundEffect = ref<'particles' | 'galaxy'>('galaxy')
+  const isTransitioning = ref(false)
+  const transitionProgress = ref(0)
 
   // Getters
   const featuredProjects = computed(() =>
@@ -177,8 +180,30 @@ export const usePortfolioStore = defineStore('portfolio', () => {
 
   // Actions
   const setCurrentSection = (section: Section) => {
-    currentSection.value = section
-    chatContext.value.userProfile.currentSection = section
+    if (currentSection.value !== section) {
+      previousSection.value = currentSection.value
+      isTransitioning.value = true
+      transitionProgress.value = 0
+      currentSection.value = section
+      chatContext.value.userProfile.currentSection = section
+
+      // Animate transition progress
+      const duration = 1000 // 1 seconds
+      const startTime = Date.now()
+      const animate = () => {
+        const elapsed = Date.now() - startTime
+        const progress = Math.min(elapsed / duration, 1)
+        transitionProgress.value = progress
+
+        if (progress < 1) {
+          requestAnimationFrame(animate)
+        } else {
+          isTransitioning.value = false
+          transitionProgress.value = 0
+        }
+      }
+      requestAnimationFrame(animate)
+    }
   }
 
   const addChatMessage = (message: Omit<ChatMessage, 'id' | 'timestamp'>) => {
@@ -234,6 +259,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
   return {
     // State
     currentSection,
+    previousSection,
     isLoading,
     error,
     projects,
@@ -243,6 +269,8 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     particleSystemActive,
     animationsEnabled,
     backgroundEffect,
+    isTransitioning,
+    transitionProgress,
 
     // Getters
     featuredProjects,

@@ -8,7 +8,21 @@
     />
 
     <!-- Galaxy Background -->
-    <Galaxy v-if="portfolioStore.backgroundEffect === 'galaxy'" :hyperspeed-preset="'one'" />
+    <Galaxy
+      v-if="portfolioStore.backgroundEffect === 'galaxy'"
+      :speed="1 + 2 * Math.sin(portfolioStore.transitionProgress * Math.PI)"
+      :star-speed="0.5 + 1 * Math.sin(portfolioStore.transitionProgress * Math.PI)"
+      :rotation-speed="0.1 + 0.2 * Math.sin(portfolioStore.transitionProgress * Math.PI)"
+    />
+
+    <!-- Hyperspeed Effect -->
+    <div
+      v-show="portfolioStore.isTransitioning"
+      :style="{ opacity: Math.sin(portfolioStore.transitionProgress * Math.PI) }"
+      class="transition-opacity duration-75"
+    >
+      <Hyperspeed :effect-options="hyperspeedPresets.one" />
+    </div>
 
     <!-- Splash Cursor Effect -->
     <SplashCursor />
@@ -23,7 +37,7 @@
         <!-- Landing Section -->
         <section
           id="landing"
-          v-show="portfolioStore.currentSection === 'landing'"
+          v-show="(portfolioStore.currentSection === 'landing' && !portfolioStore.isTransitioning) || (portfolioStore.previousSection === 'landing' && portfolioStore.isTransitioning)"
           class="h-screen w-full"
         >
           <LandingPage />
@@ -32,7 +46,7 @@
         <!-- About Section -->
         <section
           id="about"
-          v-show="portfolioStore.currentSection === 'about'"
+          v-show="(portfolioStore.currentSection === 'about' && !portfolioStore.isTransitioning) || (portfolioStore.previousSection === 'about' && portfolioStore.isTransitioning)"
           class="min-h-screen py-16"
         >
           <AboutPage />
@@ -41,7 +55,7 @@
         <!-- Projects Section -->
         <section
           id="projects"
-          v-show="portfolioStore.currentSection === 'projects'"
+          v-show="(portfolioStore.currentSection === 'projects' && !portfolioStore.isTransitioning) || (portfolioStore.previousSection === 'projects' && portfolioStore.isTransitioning)"
           class="min-h-screen py-16"
         >
           <ProjectsPage />
@@ -50,7 +64,7 @@
         <!-- Skills Section -->
         <section
           id="skills"
-          v-show="portfolioStore.currentSection === 'skills'"
+          v-show="(portfolioStore.currentSection === 'skills' && !portfolioStore.isTransitioning) || (portfolioStore.previousSection === 'skills' && portfolioStore.isTransitioning)"
           class="min-h-screen py-16"
         >
           <SkillsPage />
@@ -59,7 +73,7 @@
         <!-- Contact Section -->
         <section
           id="contact"
-          v-show="portfolioStore.currentSection === 'contact'"
+          v-show="(portfolioStore.currentSection === 'contact' && !portfolioStore.isTransitioning) || (portfolioStore.previousSection === 'contact' && portfolioStore.isTransitioning)"
           class="min-h-screen py-16"
         >
           <ContactPage />
@@ -115,6 +129,7 @@
 // Composables
 import { usePortfolioStore } from '~/stores/portfolio'
 import { useEasterEggs } from '~/composables/useEasterEggs'
+import { hyperspeedPresets } from '~/components/hyperspeedPresets'
 
 // Components
 import AppHeader from '~/components/AppHeader.vue'
@@ -127,6 +142,7 @@ import ContactPage from '~/components/ContactPage.vue'
 import ChatInterface from '~/components/ChatInterface.vue'
 import PKLParticleSystem from '~/components/PKLParticleSystem.vue'
 import Galaxy from '~/components/Galaxy.vue'
+import Hyperspeed from '~/components/Hyperspeed.vue'
 import SplashCursor from '~/components/SplashCursor.vue'
 
 // Store

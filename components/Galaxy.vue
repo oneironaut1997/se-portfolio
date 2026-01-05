@@ -5,7 +5,6 @@
 <script setup lang="ts">
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
 import { ref, onMounted, onUnmounted, watch } from 'vue';
-import '~/assets/css/galaxy.css';
 
 const vertexShader = `
 attribute vec2 uv;
@@ -420,13 +419,5 @@ watch(() => props.transparent, (newVal) => {
 </script>
 
 <style scoped>
-.galaxy-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
+@import '~/assets/css/galaxy.css';
 </style>

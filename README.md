@@ -6,6 +6,7 @@ An immersive portfolio website showcasing full-stack development skills with 3D 
 
 - **Interactive Text Effects**: Dynamic font variations on mouse proximity for headings (used on Landing and About pages)
 - **3D Particle Systems**: Interactive background particle effects powered by Three.js
+- **Galaxy Background**: Animated star field background effect
 - **AI Chat Interface**: Integrated OpenAI-powered assistant for portfolio interaction
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
 - **Easter Eggs**: Hidden features and voice recognition capabilities
@@ -25,6 +26,7 @@ An immersive portfolio website showcasing full-stack development skills with 3D 
 ```
 se/
 ├── components/          # Vue components
+│   ├── Galaxy.vue       # Galaxy star field background
 │   ├── ParticleSystem.vue # Background particles
 │   ├── PKLParticleSystem.vue # PKL avatar particles
 │   ├── TextPressure.vue # Interactive text effect component

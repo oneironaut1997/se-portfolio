@@ -70,13 +70,13 @@
             © {{ currentYear }} Sherwin Estrera. All rights reserved.
           </p>
           <div class="flex items-center space-x-6 text-sm text-gray-300">
-            <button
+            <!-- <button
               @click="toggleParticles"
               class="hover:text-white transition-colors duration-200"
               :aria-label="particleSystemActive ? 'Disable particle effects' : 'Enable particle effects'"
             >
               {{ particleSystemActive ? 'Disable' : 'Enable' }} Particles
-            </button>
+            </button> -->
             <!-- <button
               @click="toggleAnimations"
               class="hover:text-white transition-colors duration-200"
