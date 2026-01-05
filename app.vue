@@ -33,12 +33,12 @@
       <AppHeader />
 
       <!-- Main Content Area -->
-      <main :class="portfolioStore.currentSection === 'landing' ? '' : 'container mx-auto px-4 py-8'">
+      <main class="container mx-auto px-4 py-8">
         <!-- Landing Section -->
         <section
           id="landing"
           v-show="(portfolioStore.currentSection === 'landing' && !portfolioStore.isTransitioning) || (portfolioStore.previousSection === 'landing' && portfolioStore.isTransitioning)"
-          class="h-screen w-full"
+          class="min-h-screen py-16"
         >
           <LandingPage />
         </section>
