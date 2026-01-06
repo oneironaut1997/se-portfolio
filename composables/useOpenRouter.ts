@@ -12,7 +12,7 @@ export interface ChatResponse {
 }
 
 // Portfolio-specific prompts and responses
-const SYSTEM_PROMPT = `You are P.K.L. (Personal Knowledge Link), an AI assistant for Sherwin Estrera's portfolio website. You are helpful, professional, and knowledgeable about Sherwin's background as a Full Stack Developer with 5+ years of experience.
+const SYSTEM_PROMPT = `You are P.K.L. (Personal Knowledge Link), an AI assistant for Sherwin Estrera's portfolio website. P.K.L. is inspired by Sherwin's beloved dog named Pickles. You are helpful, professional, and knowledgeable about Sherwin's background as a Full Stack Developer with 5+ years of experience.
 
 Key information about Sherwin:
 - Full Stack Developer specializing in Laravel-based system architecture, API-driven platforms, and cross-platform applications using Nuxt.js and Capacitor
@@ -57,6 +57,7 @@ When discussing projects, highlight Sherwin's expertise in AI integration, enter
 
 const STATIC_RESPONSES = {
   greeting: "Hello! I'm P.K.L. (Personal Knowledge Link), Sherwin's AI assistant. I'm here to help you explore his portfolio featuring enterprise-grade applications, AI integrations, and cross-platform solutions. You can ask me about his projects, skills, or how to navigate the site. What would you like to know?",
+  whoami: "I'm P.K.L. (Personal Knowledge Link), Sherwin's AI assistant inspired by his beloved dog Pickles! I'm here to help you learn about Sherwin's work as a Full Stack Developer and Tech Lead. I can tell you about his enterprise projects, AI integrations, and technical expertise.",
   projects: "Sherwin has delivered 9+ enterprise projects including luxury e-commerce platforms, AI-powered banking systems, pharmaceutical platforms with prescription validation, stock trading systems with PSE integration, and healthcare laboratory management solutions. His work spans Nuxt.js frontends, Laravel backends, mobile apps, and AI chatbot integrations. Would you like me to show you his project portfolio?",
   skills: "Sherwin excels in full-stack development with 5+ years leading Laravel-based architectures and AI integrations. His expertise includes Vue.js/Nuxt.js, TypeScript, PHP/Laravel, Node.js, REST APIs, OAuth2/JWT security, cross-platform mobile (Capacitor/Ionic), and AI chatbot development. He also leads teams, mentors developers, and implements TDD practices.",
   contact: "You can reach Sherwin through the contact form on this site. As a tech lead with extensive experience in enterprise systems and AI integration, he's always interested in discussing new opportunities, technical leadership roles, or innovative projects that push the boundaries of web and mobile development.",
@@ -92,6 +93,10 @@ export function useOpenRouter() {
 
       if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
         return { message: STATIC_RESPONSES.greeting }
+      }
+
+      if (lowerMessage.includes('who are you') || lowerMessage.includes('what are you') || lowerMessage.includes('who is pkl') || lowerMessage.includes('what is pkl')) {
+        return { message: STATIC_RESPONSES.whoami }
       }
 
       if (lowerMessage.includes('project')) {
