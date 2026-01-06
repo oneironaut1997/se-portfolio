@@ -1,5 +1,6 @@
 import { ref, readonly } from 'vue'
 import OpenAI from 'openai'
+import type { ChatCompletionMessageParam } from 'openai/resources/chat/completions'
 
 export interface ChatResponse {
   message: string
@@ -41,20 +42,21 @@ const STATIC_RESPONSES = {
   about: "Sherwin is a passionate Full Stack Developer  who loves creating immersive web experiences. He combines technical expertise with creative design to build applications that not only function well but also provide engaging user experiences."
 }
 
-export function useOpenAI() {
+export function useOpenRouter() {
   const isLoading = ref(false)
   const error = ref<string | null>(null)
 
-  // Initialize OpenAI client (will be configured with runtime config)
-  const getOpenAIClient = () => {
+  // Initialize OpenRouter client (will be configured with runtime config)
+  const getOpenRouterClient = () => {
     // For now, use environment variable directly
-    const apiKey = process.env.NUXT_PUBLIC_OPENAI_API_KEY || process.env.OPENAI_API_KEY
+    const apiKey = process.env.NUXT_PUBLIC_OPENROUTER_API_KEY || process.env.OPENROUTER_API_KEY
     if (!apiKey) {
-      console.warn('OpenAI API key not configured')
+      console.warn('OpenRouter API key not configured')
       return null
     }
     return new OpenAI({
       apiKey,
+      baseURL: 'https://openrouter.ai/api/v1',
       dangerouslyAllowBrowser: true // Note: In production, API calls should go through server-side
     })
   }
@@ -87,8 +89,8 @@ export function useOpenAI() {
         return { message: STATIC_RESPONSES.about }
       }
 
-      // For more complex queries, use OpenAI if available
-      const client = getOpenAIClient()
+      // For more complex queries, use OpenRouter if available
+      const client = getOpenRouterClient()
       if (!client) {
         // Fallback response when API is not configured
         return {
@@ -96,7 +98,7 @@ export function useOpenAI() {
         }
       }
 
-      const messages: ChatMessage[] = [
+      const messages: ChatCompletionMessageParam[] = [
         { role: 'system', content: SYSTEM_PROMPT },
         { role: 'user', content: userMessage }
       ]
@@ -108,7 +110,7 @@ export function useOpenAI() {
       }
 
       const completion = await client.chat.completions.create({
-        model: 'gpt-3.5-turbo',
+        model: 'openai/gpt-3.5-turbo',
         messages,
         max_tokens: 150,
         temperature: 0.7,
@@ -142,7 +144,7 @@ export function useOpenAI() {
 
   const checkAPIStatus = async (): Promise<boolean> => {
     try {
-      const client = getOpenAIClient()
+      const client = getOpenRouterClient()
       if (!client) return false
 
       // Simple test call

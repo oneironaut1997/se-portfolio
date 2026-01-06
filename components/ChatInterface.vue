@@ -105,7 +105,7 @@
 <script setup lang="ts">
 import { ref, computed, nextTick, watch } from 'vue'
 import { usePortfolioStore } from '~/stores/portfolio'
-import { useOpenAI, parsePortfolioCommand, getPortfolioResponse } from '~/composables/useOpenAI'
+import { useOpenRouter, parsePortfolioCommand, getPortfolioResponse } from '~/composables/useOpenRouter'
 
 // Emits
 const emit = defineEmits<{
@@ -116,7 +116,7 @@ const emit = defineEmits<{
 const portfolioStore = usePortfolioStore()
 
 // Composables
-const { generateResponse, isLoading } = useOpenAI()
+const { generateResponse, isLoading } = useOpenRouter()
 
 // Reactive state
 const inputMessage = ref('')
