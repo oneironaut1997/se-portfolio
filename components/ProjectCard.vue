@@ -75,7 +75,7 @@
       </div>
 
       <p class="text-gray-300 text-sm mb-4 leading-relaxed">
-        {{ project.description }}
+        {{ truncatedDescription }}
       </p>
 
       <!-- Technologies -->
@@ -116,7 +116,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import type { Project } from '~/stores/portfolio'
 import ProjectModal from '~/components/ProjectModal.vue'
 
@@ -126,6 +126,12 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+
+// Computed
+const truncatedDescription = computed(() => {
+  const desc = props.project.description;
+  return desc.length > 100 ? desc.substring(0, 100) + '...' : desc;
+});
 
 // Reactive state
 const isHovered = ref(false)
@@ -141,7 +147,6 @@ const onMouseLeave = () => {
 }
 
 const openProject = () => {
-  console.log('Opening project:', props.project.title)
   showModal.value = true
 }
 

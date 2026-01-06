@@ -13,13 +13,13 @@
         <div class="flex items-center justify-center min-h-[50vh]">
           <ProfileCard
             name="Sherwin Estrera"
-            title="Fullstack Developer"
+            title="Full Stack Developer"
             handle="seestrera"
             status="Online"
             contact-text="Contact Me"
-            avatar-url="/assets/person.png"
-            icon-url="/assets/iconpattern.png"
-            grain-url="/assets/grain.webp"
+            avatar-url="/profile.png"
+            icon-url="/iconpattern.png"
+            grain-url="/grain.webp"
             :show-user-info="true"
             :show-behind-gradient="true"
             :enable-tilt="true"

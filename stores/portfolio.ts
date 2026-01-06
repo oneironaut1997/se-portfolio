@@ -7,11 +7,11 @@ export interface Project {
   title: string
   description: string
   technologies: string[]
-  imageUrl: string
-  demoUrl?: string
-  githubUrl?: string
+  imageUrl: string | null
+  demoUrl?: string | null
+  githubUrl?: string | null
   featured: boolean
-  category: 'web' | 'mobile' | 'ai' | 'other'
+  category: string
 }
 
 export interface Skill {
@@ -41,48 +41,175 @@ export const usePortfolioStore = defineStore('portfolio', () => {
   const error = ref<string | null>(null)
   const projects = ref<Project[]>([
     {
-      id: 'cinematic-portfolio',
-      title: 'Cinematic AI Portfolio',
-      description: 'An immersive 3D portfolio website featuring AI chat integration, particle systems, and cinematic animations built with Three.js, Vue.js, and GSAP.',
-      technologies: ['Vue.js', 'Three.js', 'GSAP', 'OpenAI API', 'TailwindCSS', 'Nuxt.js'],
-      imageUrl: '/images/projects/cinematic-portfolio.jpg',
-      demoUrl: 'https://sherwinestrera.dev',
-      githubUrl: 'https://github.com/sherwinestrera/portfolio',
+      id: 'luxury-clothing-ecommerce',
+      title: 'Luxury Clothing E-Commerce Platform',
+      description: 'A multi-platform luxury clothing e-commerce solution consisting of a Nuxt-based web storefront, a Laravel-powered admin backend, and two mobile applications. The customer-facing app mirrors the web purchasing experience, while a dedicated sales staff app enables direct chat and video calls with VIP customers to provide personalized service. All product and customer data are fetched from an external database. The platform includes secure online payment integration and supports high-end customer engagement workflows.',
+      technologies: [
+        'Nuxt.js',
+        'Vue.js',
+        'Laravel',
+        'REST API',
+        'Mobile Apps',
+        'Online Payment Gateway',
+        'Real-time Chat',
+        'Video Call Integration',
+        'External Database Integration'
+      ],
+      imageUrl: null,
+      demoUrl: null,
+      githubUrl: null,
       featured: true,
-      category: 'web'
+      category: 'ecommerce'
     },
     {
-      id: 'laravel-ecommerce',
-      title: 'Laravel E-commerce Platform',
-      description: 'Full-featured e-commerce platform with payment integration, inventory management, and admin dashboard built with Laravel and Vue.js.',
-      technologies: ['Laravel', 'Vue.js', 'MySQL', 'Stripe API', 'TailwindCSS'],
-      imageUrl: '/images/projects/laravel-ecommerce.jpg',
-      demoUrl: 'https://example-ecommerce.com',
-      githubUrl: 'https://github.com/sherwinestrera/laravel-ecommerce',
+      id: 'spa-booking-system',
+      title: 'Online SPA Booking System',
+      description: 'A custom-built online booking system for a SPA business developed using Laravel. The platform supports multiple user roles including customers, front desk staff, and administrators. Features include online payment integration and a fully custom time-slot booking engine designed to handle availability, scheduling rules, and booking conflicts.',
+      technologies: [
+        'Laravel',
+        'Frontend UI',
+        'REST API',
+        'Online Payment Gateway',
+        'Custom Booking Engine',
+        'Role-Based Access Control'
+      ],
+      imageUrl: null,
+      demoUrl: null,
+      githubUrl: null,
       featured: true,
-      category: 'web'
+      category: 'booking'
     },
     {
-      id: 'ai-chatbot',
-      title: 'AI Customer Support Chatbot',
-      description: 'Intelligent chatbot system using natural language processing for automated customer support with learning capabilities.',
-      technologies: ['Python', 'TensorFlow', 'FastAPI', 'React', 'PostgreSQL'],
-      imageUrl: '/images/projects/ai-chatbot.jpg',
-      demoUrl: 'https://ai-chatbot-demo.com',
-      githubUrl: 'https://github.com/sherwinestrera/ai-chatbot',
+      id: 'banking-ai-chatbot',
+      title: 'Banking Website with AI Chatbot',
+      description: 'A modern banking website built with Nuxt for the public-facing web and Laravel as the CMS backend. The platform includes an AI-powered chatbot implemented using Node.js to assist users with inquiries, navigation, and automated responses, enhancing customer engagement and support efficiency.',
+      technologies: [
+        'Nuxt.js',
+        'Vue.js',
+        'Laravel',
+        'Node.js',
+        'AI Chatbot',
+        'REST API',
+        'CMS Architecture'
+      ],
+      imageUrl: null,
+      demoUrl: null,
+      githubUrl: null,
       featured: true,
-      category: 'ai'
+      category: 'fintech'
     },
     {
-      id: 'mobile-fitness',
-      title: 'Cross-Platform Fitness App',
-      description: 'Mobile fitness tracking application with workout plans, progress tracking, and social features built with React Native.',
-      technologies: ['React Native', 'Firebase', 'Node.js', 'MongoDB'],
-      imageUrl: '/images/projects/mobile-fitness.jpg',
-      demoUrl: 'https://fitness-app-demo.com',
-      githubUrl: 'https://github.com/sherwinestrera/fitness-app',
-      featured: false,
-      category: 'mobile'
+      id: 'pharma-ecommerce',
+      title: 'Pharmaceutical E-Commerce Platform',
+      description: 'A pharmaceutical e-commerce platform built with Nuxt for the web storefront and Laravel for the backend services. The system includes a customer mobile application, secure online payment integration, and an AI-powered feature that flags prescription-only (RX) medications to support validation and compliance workflows.',
+      technologies: [
+        'Nuxt.js',
+        'Vue.js',
+        'Laravel',
+        'REST API',
+        'Mobile App',
+        'Online Payment Gateway',
+        'AI Integration',
+        'Prescription Validation Logic'
+      ],
+      imageUrl: null,
+      demoUrl: null,
+      githubUrl: null,
+      featured: true,
+      category: 'healthcare'
+    },
+    {
+      id: 'stock-trading-platform',
+      title: 'Stock Trading Platform',
+      description: 'A stock trading web platform developed using Nuxt for the frontend and Laravel for backend services. The system integrates with the Philippine Stock Exchange (PSE) via a custom Node.js data processor that parses and normalizes raw market data into readable and usable formats. The platform also integrates TradingView for real-time charting and market visualization.',
+      technologies: [
+        'Nuxt.js',
+        'Vue.js',
+        'Laravel',
+        'Node.js',
+        'PSE Market Data Integration',
+        'Custom Data Processing',
+        'TradingView Integration',
+        'REST API'
+      ],
+      imageUrl: null,
+      demoUrl: null,
+      githubUrl: null,
+      featured: true,
+      category: 'fintech'
+    },
+    {
+      id: 'lab-test-booking-platform',
+      title: 'Laboratory Test Booking and Results Platform',
+      description: 'An online healthcare platform for booking laboratory tests and viewing test results. The system includes a custom-built time-slot booking engine and integrates with external laboratory services to handle scheduling, test processing, and result retrieval.',
+      technologies: [
+        'Laravel',
+        'Web Frontend',
+        'REST API',
+        'Custom Booking Engine',
+        'External Service Integration',
+        'Healthcare Workflow'
+      ],
+      imageUrl: null,
+      demoUrl: null,
+      githubUrl: null,
+      featured: true,
+      category: 'healthcare'
+    },
+    {
+      id: 'machine-maintenance-system',
+      title: 'Machine Maintenance and Parts Management System',
+      description: 'A web-based system designed to manage machine maintenance workflows and the procurement of replacement parts. The platform supports tracking maintenance activities, processing purchase requests, managing parts inventory, and integrates with third-party services to support external suppliers, notifications, and operational data exchange.',
+      technologies: [
+        'Laravel',
+        'Web Frontend',
+        'REST API',
+        'Maintenance Workflow Management',
+        'Procurement Processing',
+        'Inventory Tracking',
+        'Third-Party Service Integration'
+      ],
+      imageUrl: null,
+      demoUrl: null,
+      githubUrl: null,
+      featured: true,
+      category: 'enterprise'
+    },
+    {
+      id: 'networked-ecommerce-platform',
+      title: 'Networked E-Commerce Platform',
+      description: 'A Laravel-based e-commerce platform for health and wellness products, designed with a hierarchical dealer system to manage upline relationships. The platform supports product purchases, dealer management, sales tracking, and commission calculation, enabling structured distribution and automated reporting workflows.',
+      technologies: [
+        'Laravel',
+        'Web Frontend',
+        'REST API',
+        'Dealer / Upline Management',
+        'E-Commerce Logic',
+        'Commission & Sales Tracking'
+      ],
+      imageUrl: null,
+      demoUrl: null,
+      githubUrl: null,
+      featured: true,
+      category: 'ecommerce'
+    },
+    {
+      id: 'lab-results-processing-system',
+      title: 'Laboratory Results Processing System',
+      description: 'A web-based system designed to process and manage laboratory results. The platform serves laboratory clinics as customers and includes features for doctors to review and validate lab results. It supports secure data handling, role-based access control, and integrates with external laboratory systems for result submission and retrieval.',
+      technologies: [
+        'Laravel',
+        'Web Frontend',
+        'REST API',
+        'Role-Based Access Control',
+        'Data Validation & Review',
+        'External Laboratory System Integration'
+      ],
+      imageUrl: null,
+      demoUrl: null,
+      githubUrl: null,
+      featured: true,
+      category: 'healthcare'
     }
   ])
 
@@ -97,19 +224,19 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     { id: 'responsive', name: 'Responsive Design', category: 'frontend', proficiency: 5, years: 4 },
     { id: 'spa', name: 'SPAs', category: 'frontend', proficiency: 5, years: 4 },
     { id: 'pwa', name: 'PWAs', category: 'frontend', proficiency: 4, years: 2 },
+    { id: 'csp', name: 'CSP', category: 'frontend', proficiency: 3, years: 2 },
 
     // Backend Skills
     { id: 'laravel', name: 'Laravel', category: 'backend', proficiency: 5, years: 5 },
     { id: 'php', name: 'PHP', category: 'backend', proficiency: 5, years: 4 },
-    { id: 'nodejs', name: 'Node.js', category: 'backend', proficiency: 4, years: 4 },
+    { id: 'nodejs', name: 'Node.js', category: 'backend', proficiency: 3, years: 2 },
     { id: 'mysql', name: 'MySQL', category: 'backend', proficiency: 4, years: 5 },
-    { id: 'posgresql', name: 'PostgreSQL', category: 'backend', proficiency: 2.5, years: 2 },
+    { id: 'posgresql', name: 'PostgreSQL', category: 'backend', proficiency: 2, years: 2 },
     { id: 'api', name: 'REST APIs', category: 'backend', proficiency: 5, years: 4 },
     { id: 'oauth2', name: 'OAuth2', category: 'backend', proficiency: 4, years: 3 },
     { id: 'jwt', name: 'JWT', category: 'backend', proficiency: 4, years: 3 },
     { id: 'rbac', name: 'RBAC', category: 'backend', proficiency: 4, years: 3 },
     { id: 'security-headers', name: 'Security Headers', category: 'backend', proficiency: 4, years: 3 },
-    { id: 'csp', name: 'CSP', category: 'backend', proficiency: 4, years: 3 },
 
     // Tools & Technologies
     { id: 'git', name: 'Git', category: 'tools', proficiency: 5, years: 5 },
@@ -118,12 +245,12 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     { id: 'cloudflare', name: 'Cloudflare', category: 'tools', proficiency: 3, years: 2 },
     { id: 'cicd', name: 'CI/CD', category: 'tools', proficiency: 4, years: 3 },
     { id: 'phpunit', name: 'PHPUnit', category: 'tools', proficiency: 4, years: 4 },
-    { id: 'jest', name: 'Jest', category: 'tools', proficiency: 4, years: 3 },
+    { id: 'jest', name: 'Jest', category: 'tools', proficiency: 2, years: 2 },
     { id: 'playwright', name: 'Playwright', category: 'tools', proficiency: 3, years: 1 },
     { id: 'vulnerability-audits', name: 'Vulnerability Audits', category: 'tools', proficiency: 3, years: 2 },
     { id: 'ai-chatbot', name: 'AI Chatbot Integration', category: 'tools', proficiency: 4, years: 2 },
     { id: 'gsap', name: 'GSAP', category: 'tools', proficiency: 4, years: 2 },
-    { id: 'figma', name: 'Figma', category: 'tools', proficiency: 4, years: 3 },
+    { id: 'figma', name: 'Figma', category: 'tools', proficiency: 3, years: 3 },
 
     // Soft Skills
     { id: 'communication', name: 'Communication', category: 'soft', proficiency: 5, years: 5 },

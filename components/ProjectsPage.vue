@@ -8,13 +8,8 @@
       <ShinyText text="A showcase of my recent work combining cutting-edge technologies (WIP)." className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed" />
     </div>
 
-    <!-- 3D Projects Carousel -->
-    <!-- <div class="container mx-auto px-4 mb-16">
-      <ProjectsCarousel @viewDetails="viewProjectDetails" />
-    </div> -->
-
     <!-- Projects Grid (Fallback/Additional) -->
-    <!-- <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
         <ProjectCard
           v-for="project in featuredProjects"
@@ -23,16 +18,7 @@
           class="animate-fade-in-up"
         />
       </div>
-
-      <div class="text-center mt-12">
-        <button class="btn-secondary">
-          View All Projects
-          <svg class="ml-2 w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </button>
-      </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -40,7 +26,6 @@
 import { computed } from 'vue'
 import { usePortfolioStore } from '~/stores/portfolio'
 import ProjectCard from '~/components/ProjectCard.vue'
-import ProjectsCarousel from '~/components/ProjectsCarousel.vue'
 import TextPressure from '~/components/TextPressure.vue'
 import ShinyText from '~/components/ShinyText.vue'
 import type { Project } from '~/stores/portfolio'
@@ -52,13 +37,6 @@ const portfolioStore = usePortfolioStore()
 const featuredProjects = computed(() =>
   portfolioStore.projects.filter(project => project.featured)
 )
-
-// Methods
-const viewProjectDetails = (project: Project) => {
-  // TODO: Implement project detail modal or navigation
-  console.log('Viewing project details:', project.title)
-  alert(`Project: ${project.title}\n\n${project.description}\n\nTechnologies: ${project.technologies.join(', ')}`)
-}
 
 // Methods
 const getShapeClass = (index: number) => {
