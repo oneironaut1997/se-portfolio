@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-interface fixed bottom-6 right-6 w-80 h-96 bg-gray-800/95 backdrop-blur-md rounded-2xl border border-gray-700 shadow-2xl z-50 flex flex-col overflow-hidden">
+  <div class="chat-interface fixed bottom-6 right-6 w-100 h-[36rem] bg-gray-800/95 backdrop-blur-md rounded-2xl border border-gray-700 shadow-2xl z-50 flex flex-col overflow-hidden">
     <!-- Chat Header -->
     <div class="flex items-center justify-between p-4 border-b border-gray-700">
       <div class="flex items-center space-x-3">
