@@ -17,7 +17,7 @@
             @click="toggleVisualization"
             class="btn-secondary text-lg px-6 py-3"
           >
-            {{ showVisualization ? 'Hide' : 'Show' }} 3D Skills Visualization
+            {{ showVisualization ? 'Hide' : 'Show' }} Skills Visualization
             <svg class="ml-2 w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="showVisualization ? 'M19 9l-7 7-7-7' : 'M9 5l7 7-7 7'" />
             </svg>
