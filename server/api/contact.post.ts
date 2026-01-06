@@ -3,10 +3,10 @@ import nodemailer from 'nodemailer'
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const body = await readBody(event)
-  const { name, email, subject, message } = body
+  const { name, email, subject, message, recaptchaResponse } = body
 
   // Basic validation
-  if (!name || !email || !subject || !message) {
+  if (!name || !email || !subject || !message || !recaptchaResponse) {
     throw createError({ statusCode: 400, statusMessage: 'Missing required fields' })
   }
 
@@ -14,6 +14,18 @@ export default defineEventHandler(async (event) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!emailRegex.test(email)) {
     throw createError({ statusCode: 400, statusMessage: 'Invalid email format' })
+  }
+
+  // Verify reCAPTCHA
+  const recaptchaVerification = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `secret=${config.recaptchaSecretKey}&response=${recaptchaResponse}`
+  })
+  const recaptchaResult = await recaptchaVerification.json()
+
+  if (!recaptchaResult.success) {
+    throw createError({ statusCode: 400, statusMessage: 'reCAPTCHA verification failed' })
   }
 
   // Create transporter

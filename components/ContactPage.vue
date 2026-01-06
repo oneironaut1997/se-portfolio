@@ -96,7 +96,12 @@
                       :disabled="isSubmitting"
                     ></textarea>
                   </div>
-  
+
+                  <!-- reCAPTCHA -->
+                  <div class="flex justify-center">
+                    <div ref="recaptchaContainer" class="g-recaptcha"></div>
+                  </div>
+
                   <!-- Submit Button -->
                   <button
                     type="submit"
@@ -194,6 +199,9 @@ import { ref, computed, nextTick, onMounted } from 'vue'
 import TextPressure from '~/components/TextPressure.vue'
 import ShinyText from '~/components/ShinyText.vue'
 import ProfileCard from "./ProfileCard.vue";
+import { useRuntimeConfig } from '#imports'
+
+const config = useRuntimeConfig()
 
 // Reactive state
 const form = ref({
@@ -208,6 +216,8 @@ const showContactForm = ref(false)
 
 const isSubmitting = ref(false)
 const submitStatus = ref<{ type: 'success' | 'error'; message: string } | null>(null)
+const recaptchaResponse = ref('')
+const recaptchaContainer = ref<HTMLDivElement>()
 
 // Computed properties
 const isFormValid = computed(() => {
@@ -215,7 +225,8 @@ const isFormValid = computed(() => {
          form.value.email.trim() &&
          form.value.subject.trim() &&
          form.value.message.trim() &&
-         /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.value.email)
+         /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.value.email) &&
+         recaptchaResponse.value
 })
 
 // Social links
@@ -237,6 +248,18 @@ const socialLinks = [
   }
 ]
 
+// Render reCAPTCHA programmatically
+const renderRecaptcha = () => {
+  if (typeof window !== 'undefined' && window.grecaptcha && recaptchaContainer.value) {
+    window.grecaptcha.render(recaptchaContainer.value, {
+      sitekey: config.public.recaptchaSiteKey,
+      callback: 'onRecaptchaSuccess',
+      'expired-callback': 'onRecaptchaExpired',
+      'error-callback': 'onRecaptchaError'
+    })
+  }
+}
+
 // Methods
 const submitForm = async () => {
   if (!isFormValid.value || isSubmitting.value) return
@@ -248,7 +271,7 @@ const submitForm = async () => {
     const res = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...form.value })
+      body: JSON.stringify({ ...form.value, recaptchaResponse: recaptchaResponse.value })
     })
     const data = await res.json()
 
@@ -269,6 +292,12 @@ const submitForm = async () => {
       subject: '',
       message: ''
     }
+    recaptchaResponse.value = ''
+
+    // Reset reCAPTCHA widget
+    if (typeof window !== 'undefined' && window.grecaptcha) {
+      window.grecaptcha.reset()
+    }
 
   } catch (error) {
     console.error(error)
@@ -285,8 +314,44 @@ const submitForm = async () => {
 const handleContactClick = async () => {
   showContactForm.value = true;
   await nextTick();
+
+  // Render reCAPTCHA now that the container is visible
+  renderRecaptcha();
+
   document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
 };
+
+// reCAPTCHA callback functions
+const onRecaptchaSuccess = (response: string) => {
+  recaptchaResponse.value = response
+}
+
+const onRecaptchaExpired = () => {
+  recaptchaResponse.value = ''
+}
+
+const onRecaptchaError = () => {
+  recaptchaResponse.value = ''
+}
+
+// Set up global callbacks
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    window.onRecaptchaSuccess = onRecaptchaSuccess
+    window.onRecaptchaExpired = onRecaptchaExpired
+    window.onRecaptchaError = onRecaptchaError
+  }
+})
+
+// Extend window interface for reCAPTCHA callbacks
+declare global {
+  interface Window {
+    onRecaptchaSuccess: (response: string) => void
+    onRecaptchaExpired: () => void
+    onRecaptchaError: () => void
+    grecaptcha: any
+  }
+}
 
 // Icon components
 const IconGithub = {

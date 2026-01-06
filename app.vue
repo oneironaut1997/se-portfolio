@@ -121,7 +121,6 @@
 <script setup lang="ts">
 // Composables
 import { usePortfolioStore } from '~/stores/portfolio'
-import { useEasterEggs } from '~/composables/useEasterEggs'
 import { hyperspeedPresets } from '~/components/hyperspeedPresets'
 
 // Components
@@ -139,9 +138,6 @@ import SplashCursor from '~/components/SplashCursor.vue'
 
 // Store
 const portfolioStore = usePortfolioStore()
-
-// Easter eggs
-const { voiceRecognitionActive } = useEasterEggs()
 
 // Page metadata
 useHead({

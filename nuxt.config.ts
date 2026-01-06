@@ -35,7 +35,7 @@ export default defineNuxtConfig({
 
   // Build configuration
   build: {
-    transpile: ['three', 'vue-recaptcha-v3']
+    transpile: ['three']
   },
 
   // TypeScript configuration
