@@ -42,7 +42,7 @@ Key Skills:
 
 Personal Interests:
 - Hobbies: Eating delicious food, playing online games, watching movies, riding motorcycles
-- When not coding, enjoys gaming sessions, movie marathons, motorcycle rides, and culinary adventures
+- When not coding, enjoys gaming sessions, movie marathons, and motorcycle rides
 
 Your responses should be:
 - Concise but informative (under 150 words)
@@ -77,7 +77,8 @@ export function useOpenRouter() {
   // Initialize OpenRouter client (will be configured with runtime config)
   const getOpenRouterClient = () => {
     // For now, use environment variable directly
-    const apiKey = process.env.NUXT_PUBLIC_OPENROUTER_API_KEY || process.env.OPENROUTER_API_KEY
+    console.log(process.env.NUXT_OPENROUTER_API_KEY)
+    const apiKey = process.env.NUXT_OPENROUTER_API_KEY
     if (!apiKey) {
       console.warn('OpenRouter API key not configured')
       return null
@@ -130,7 +131,7 @@ export function useOpenRouter() {
       if (!client) {
         // Fallback response when API is not configured
         return {
-          message: "I'd love to tell you more about Sherwin's work! This portfolio demonstrates his expertise in creating immersive 3D web experiences. Feel free to explore the different sections to learn more about his projects and skills."
+          message: "I'd love to tell you more about Sherwin's work!. Feel free to explore the different sections to learn more about his projects and skills."
         }
       }
 

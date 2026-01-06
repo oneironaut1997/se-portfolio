@@ -26,6 +26,7 @@ export default defineNuxtConfig({
     smtpPass: process.env.NUXT_SMTP_PASS,
     smtpFromAddress: process.env.NUXT_SMTP_FROM_ADDRESS,
     recaptchaSecretKey: process.env.NUXT_RECAPTCHA_SECRET_KEY,
+    openRouterApiKey: process.env.NUXT_OPENROUTER_API_KEY,
 
     // Public keys (exposed to client-side)
     public: {
