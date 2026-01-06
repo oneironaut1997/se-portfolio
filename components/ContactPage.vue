@@ -10,26 +10,28 @@
 
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
-        <ProfileCard
-          name="Sherwin Estrera"
-          title="Fullstack Developer"
-          handle="seestrera"
-          status="Online"
-          contact-text="Contact Me"
-          avatar-url="/assets/person.png"
-          icon-url="/assets/iconpattern.png"
-          grain-url="/assets/grain.webp"
-          :show-user-info="true"
-          :show-behind-gradient="true"
-          :enable-tilt="true"
-          @contact-click="handleContactClick"
-        />
+        <div class="flex items-center justify-center min-h-[50vh]">
+          <ProfileCard
+            name="Sherwin Estrera"
+            title="Fullstack Developer"
+            handle="seestrera"
+            status="Online"
+            contact-text="Contact Me"
+            avatar-url="/assets/person.png"
+            icon-url="/assets/iconpattern.png"
+            grain-url="/assets/grain.webp"
+            :show-user-info="true"
+            :show-behind-gradient="true"
+            :enable-tilt="true"
+            @contact-click="handleContactClick"
+          />
+        </div>
   
         <div v-if="showContactForm" class="mt-12">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <!-- Contact Form -->
             <div class="space-y-6">
-              <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
+              <div id="contact-form" class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
                 <h3 class="text-2xl font-bold text-white mb-6">Send a Message</h3>
   
                 <form @submit.prevent="submitForm" class="space-y-6">
@@ -187,7 +189,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import TextPressure from '~/components/TextPressure.vue'
 import ShinyText from '~/components/ShinyText.vue'
 import ProfileCard from "./ProfileCard.vue";
@@ -270,8 +272,10 @@ const submitForm = async () => {
 }
 
 // Handle contact button click to show form and social sections
-const handleContactClick = () => {
+const handleContactClick = async () => {
   showContactForm.value = true;
+  await nextTick();
+  document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
 };
 
 // Icon components
