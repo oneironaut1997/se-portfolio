@@ -117,7 +117,7 @@ interface Props {
   project: Project
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 // Reactive state
 const isHovered = ref(false)
@@ -133,10 +133,10 @@ const onMouseLeave = () => {
 
 const openProject = () => {
   // TODO: Implement project modal/detail view
-  console.log('Opening project:', project.title)
+  console.log('Opening project:', props.project.title)
 
   // For now, just show an alert
-  alert(`Project: ${project.title}\n\n${project.description}\n\nTechnologies: ${project.technologies.join(', ')}`)
+  alert(`Project: ${props.project.title}\n\n${props.project.description}\n\nTechnologies: ${props.project.technologies.join(', ')}`)
 }
 </script>
 
