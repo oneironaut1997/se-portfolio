@@ -105,12 +105,20 @@
         </div>
       </div>
     </div>
+
+    <!-- Project Modal -->
+    <ProjectModal
+      :project="project"
+      :is-open="showModal"
+      @close="closeModal"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Project } from '~/stores/portfolio'
+import ProjectModal from '~/components/ProjectModal.vue'
 
 // Props
 interface Props {
@@ -121,6 +129,7 @@ const props = defineProps<Props>()
 
 // Reactive state
 const isHovered = ref(false)
+const showModal = ref(false)
 
 // Methods
 const onMouseEnter = () => {
@@ -132,11 +141,12 @@ const onMouseLeave = () => {
 }
 
 const openProject = () => {
-  // TODO: Implement project modal/detail view
   console.log('Opening project:', props.project.title)
+  showModal.value = true
+}
 
-  // For now, just show an alert
-  alert(`Project: ${props.project.title}\n\n${props.project.description}\n\nTechnologies: ${props.project.technologies.join(', ')}`)
+const closeModal = () => {
+  showModal.value = false
 }
 </script>
 
