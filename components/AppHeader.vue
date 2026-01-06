@@ -4,9 +4,7 @@
       <div class="flex items-center justify-between">
         <!-- Logo/Brand -->
         <div class="flex items-center space-x-2 cursor-pointer" @click="navigateTo('landing')">
-          <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-            <span class="text-white font-bold text-sm">SE</span>
-          </div>
+          <img :src="miniAvatarUrl" alt="Logo" class="w-8 h-8 rounded-lg object-cover" style="filter: grayscale(100%)" />
           <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Sherwin Estrera
           </span>
@@ -82,7 +80,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { usePortfolioStore } from '~/stores/portfolio'
 
 // Store
@@ -93,6 +91,7 @@ const showMobileMenu = ref(false)
 
 // Computed properties
 const currentSection = computed(() => portfolioStore.currentSection)
+const miniAvatarUrl = computed(() => portfolioStore.miniAvatarUrl)
 
 // Navigation items
 const navItems = [

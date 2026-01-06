@@ -28,7 +28,6 @@ se/
 ├── components/          # Vue components
 │   ├── Galaxy.vue       # Galaxy star field background
 │   ├── ParticleSystem.vue # Background particles
-│   ├── PKLParticleSystem.vue # PKL avatar particles
 │   ├── TextPressure.vue # Interactive text effect component
 │   └── TextType.vue     # Alternative text component
 ├── composables/         # Vue composables

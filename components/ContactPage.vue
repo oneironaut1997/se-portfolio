@@ -165,6 +165,7 @@
                     rel="noopener noreferrer"
                     class="flex items-center justify-center space-x-3 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-all duration-200 group"
                   >
+                    <!-- <component :is="social.icon" class="w-5 h-5 mr-2" /> -->
                     <span class="text-gray-300 group-hover:text-white font-medium">{{ social.name }}</span>
                   </a>
                 </div>
@@ -189,7 +190,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick } from 'vue'
+import { ref, computed, nextTick, onMounted } from 'vue'
 import TextPressure from '~/components/TextPressure.vue'
 import ShinyText from '~/components/ShinyText.vue'
 import ProfileCard from "./ProfileCard.vue";
@@ -221,12 +222,12 @@ const isFormValid = computed(() => {
 const socialLinks = [
   {
     name: 'GitHub',
-    url: 'https://github.com/sherwinestrera',
+    url: 'https://github.com/oneironaut1997',
     icon: 'IconGithub'
   },
   {
     name: 'LinkedIn',
-    url: 'www.linkedin.com/in/sherwin-estrera-95601b242',
+    url: 'https://linkedin.com/in/sherwin-estrera-95601b242',
     icon: 'IconLinkedin'
   },
   {
@@ -244,13 +245,21 @@ const submitForm = async () => {
   submitStatus.value = null
 
   try {
-    // Simulate form submission (replace with actual API call)
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...form.value })
+    })
+    const data = await res.json()
+
+    if (!res.ok) {
+      throw new Error(data.message || 'Failed to send email')
+    }
 
     // Success
     submitStatus.value = {
       type: 'success',
-      message: 'Thank you for your message! I\'ll get back to you within 24 hours.'
+      message: data.message || 'Thank you for your message! I\'ll get back to you within 24 hours.'
     }
 
     // Reset form
@@ -262,6 +271,7 @@ const submitForm = async () => {
     }
 
   } catch (error) {
+    console.error(error)
     submitStatus.value = {
       type: 'error',
       message: 'Something went wrong. Please try again or contact me directly.'

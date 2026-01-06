@@ -79,7 +79,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  avatarUrl: '/person.png',
+  avatarUrl: '/profile.png',
   iconUrl: '/iconpattern.png',
   grainUrl: '/grain.webp',
   behindGradient: undefined,
@@ -571,7 +571,7 @@ onUnmounted(() => {
   left: 50%;
   transform: translateX(-50%) scale(1);
   bottom: 2px;
-  opacity: calc(1.75 - var(--pointer-from-center));
+  opacity: 1;
 }
 
 .pc-avatar-content::before {

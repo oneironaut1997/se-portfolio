@@ -1,12 +1,5 @@
 <template>
   <div id="app" class="min-h-screen bg-gray-900 text-white relative overflow-hidden">
-    <!-- PKL Particle Background -->
-    <PKLParticleSystem
-      v-if="portfolioStore.particleSystemActive"
-      class="particle-container"
-      :current-section="portfolioStore.currentSection"
-    />
-
     <!-- Galaxy Background -->
     <Galaxy
       v-if="portfolioStore.backgroundEffect === 'galaxy'"
@@ -140,7 +133,6 @@ import ProjectsPage from '~/components/ProjectsPage.vue'
 import SkillsPage from '~/components/SkillsPage.vue'
 import ContactPage from '~/components/ContactPage.vue'
 import ChatInterface from '~/components/ChatInterface.vue'
-import PKLParticleSystem from '~/components/PKLParticleSystem.vue'
 import Galaxy from '~/components/Galaxy.vue'
 import Hyperspeed from '~/components/Hyperspeed.vue'
 import SplashCursor from '~/components/SplashCursor.vue'

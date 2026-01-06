@@ -5,9 +5,7 @@
         <!-- Brand Section -->
         <div class="space-y-4">
           <div class="flex items-center space-x-2">
-            <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <span class="text-white font-bold text-sm">SE</span>
-            </div>
+            <img :src="miniAvatarUrl" alt="Logo" class="w-8 h-8 rounded-lg object-cover" style="filter: grayscale(100%)" />
             <span class="text-lg font-bold text-white">Sherwin Estrera</span>
           </div>
           <p class="text-gray-300 text-sm leading-relaxed">
@@ -24,7 +22,8 @@
               class="text-gray-300 hover:text-white transition-colors duration-200"
               :aria-label="`Visit ${social.name}`"
             >
-              <component :is="social.icon" class="w-5 h-5" />
+              <!-- <component :is="social.icon" class="w-5 h-5 mr-2" /> -->
+              <span class="text-gray-300 group-hover:text-white font-medium">{{ social.name }}</span>
             </a>
           </div>
         </div>
@@ -70,20 +69,6 @@
             © {{ currentYear }} Sherwin Estrera. All rights reserved.
           </p>
           <div class="flex items-center space-x-6 text-sm text-gray-300">
-            <!-- <button
-              @click="toggleParticles"
-              class="hover:text-white transition-colors duration-200"
-              :aria-label="particleSystemActive ? 'Disable particle effects' : 'Enable particle effects'"
-            >
-              {{ particleSystemActive ? 'Disable' : 'Enable' }} Particles
-            </button> -->
-            <!-- <button
-              @click="toggleAnimations"
-              class="hover:text-white transition-colors duration-200"
-              :aria-label="animationsEnabled ? 'Disable animations' : 'Enable animations'"
-            >
-              {{ animationsEnabled ? 'Disable' : 'Enable' }} Animations
-            </button> -->
           </div>
         </div>
       </div>
@@ -100,8 +85,7 @@ const portfolioStore = usePortfolioStore()
 
 // Computed properties
 const currentYear = computed(() => new Date().getFullYear())
-const particleSystemActive = computed(() => portfolioStore.particleSystemActive)
-const animationsEnabled = computed(() => portfolioStore.animationsEnabled)
+const miniAvatarUrl = computed(() => portfolioStore.miniAvatarUrl)
 
 // Navigation items
 const navItems = [
@@ -116,18 +100,18 @@ const navItems = [
 const socialLinks = [
   {
     name: 'GitHub',
-    url: 'https://github.com/sherwinestrera',
+    url: 'https://github.com/oneironaut1997',
     icon: 'IconGithub'
   },
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com/in/sherwinestrera',
+    url: 'https://linkedin.com/in/sherwin-estrera-95601b242',
     icon: 'IconLinkedin'
   },
   {
-    name: 'Twitter',
-    url: 'https://twitter.com/sherwinestrera',
-    icon: 'IconTwitter'
+    name: 'Email',
+    url: 'mailto:contact@se.estrera@gmail.com',
+    icon: 'IconMail'
   }
 ]
 
@@ -140,14 +124,6 @@ const navigateTo = (section: string) => {
   if (element) {
     element.scrollIntoView({ behavior: 'smooth' })
   }
-}
-
-const toggleParticles = () => {
-  portfolioStore.toggleParticles()
-}
-
-const toggleAnimations = () => {
-  portfolioStore.toggleAnimations()
 }
 
 // Icon components (simplified inline SVGs for now)

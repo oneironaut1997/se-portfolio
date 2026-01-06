@@ -5,7 +5,7 @@
       <h1 class="text-4xl md:text-5xl mb-4">
         <TextPressure text="Featured Projects" textColor="transparent" className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text" :minFontSize=60 />
       </h1>
-      <ShinyText text="A showcase of my recent work combining cutting-edge technologies (WIP)." className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed" />
+      <ShinyText text="A showcase of my recent work combining cutting-edge technologies." className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed" />
     </div>
 
     <!-- Projects Grid (Fallback/Additional) -->
@@ -18,6 +18,7 @@
           class="animate-fade-in-up"
         />
       </div>
+      <p class="text-center mt-8 text-gray-400">And many more projects not shown here</p>
     </div>
   </div>
 </template>

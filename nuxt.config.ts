@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   // Modules
   modules: [
     '@nuxtjs/tailwindcss',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
   ],
 
   // CSS
@@ -20,17 +20,22 @@ export default defineNuxtConfig({
   // Runtime config for environment variables
   runtimeConfig: {
     // Private keys (only available on server-side)
-    openaiApiKey: process.env.NUXT_OPENAI_API_KEY,
+    smtpHost: process.env.NUXT_SMTP_HOST,
+    smtpPort: process.env.NUXT_SMTP_PORT,
+    smtpUser: process.env.NUXT_SMTP_USER,
+    smtpPass: process.env.NUXT_SMTP_PASS,
+    smtpFromAddress: process.env.NUXT_SMTP_FROM_ADDRESS,
+    recaptchaSecretKey: process.env.NUXT_RECAPTCHA_SECRET_KEY,
 
     // Public keys (exposed to client-side)
     public: {
-      openaiApiKey: process.env.NUXT_PUBLIC_OPENAI_API_KEY
+      recaptchaSiteKey: process.env.NUXT_RECAPTCHA_SITE_KEY
     }
   },
 
   // Build configuration
   build: {
-    transpile: ['three']
+    transpile: ['three', 'vue-recaptcha-v3']
   },
 
   // TypeScript configuration

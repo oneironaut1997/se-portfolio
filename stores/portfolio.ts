@@ -284,6 +284,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
   const backgroundEffect = ref<'particles' | 'galaxy'>('galaxy')
   const isTransitioning = ref(false)
   const transitionProgress = ref(0)
+  const miniAvatarUrl = ref('/profile.png')
 
   // Getters
   const featuredProjects = computed(() =>
@@ -398,6 +399,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     backgroundEffect,
     isTransitioning,
     transitionProgress,
+    miniAvatarUrl,
 
     // Getters
     featuredProjects,
