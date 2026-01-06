@@ -1,6 +1,4 @@
 import { ref, readonly } from 'vue'
-import OpenAI from 'openai'
-import type { ChatCompletionMessageParam } from 'openai/resources/chat/completions'
 
 export interface ChatResponse {
   message: string
@@ -74,21 +72,7 @@ export function useOpenRouter() {
   const isLoading = ref(false)
   const error = ref<string | null>(null)
 
-  // Initialize OpenRouter client (will be configured with runtime config)
-  const getOpenRouterClient = () => {
-    // For now, use environment variable directly
-    console.log(process.env.NUXT_OPENROUTER_API_KEY)
-    const apiKey = process.env.NUXT_OPENROUTER_API_KEY
-    if (!apiKey) {
-      console.warn('OpenRouter API key not configured')
-      return null
-    }
-    return new OpenAI({
-      apiKey,
-      baseURL: 'https://openrouter.ai/api/v1',
-      dangerouslyAllowBrowser: true // Note: In production, API calls should go through server-side
-    })
-  }
+  // Note: OpenRouter client is now handled server-side via /api/chat
 
   const generateResponse = async (userMessage: string, context?: string[]): Promise<ChatResponse> => {
     isLoading.value = true
@@ -126,48 +110,23 @@ export function useOpenRouter() {
         return { message: STATIC_RESPONSES.about }
       }
 
-      // For more complex queries, use OpenRouter if available
-      const client = getOpenRouterClient()
-      if (!client) {
-        // Fallback response when API is not configured
+      // For more complex queries, use server-side API
+      try {
+        const response = await $fetch('/api/chat', {
+          method: 'POST',
+          body: { message: userMessage, context }
+        })
+        return response as ChatResponse
+      } catch (apiError) {
+        console.error('Server API error:', apiError)
+        // Fallback response when API fails
         return {
-          message: "I'd love to tell you more about Sherwin's work!. Feel free to explore the different sections to learn more about his projects and skills."
+          message: "I'm experiencing some technical difficulties, but I'd still love to help you explore Sherwin's portfolio! Feel free to navigate through the different sections to see his work."
         }
       }
 
-      const messages: ChatCompletionMessageParam[] = [
-        { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: userMessage }
-      ]
-
-      // Add context from previous interactions if available
-      if (context && context.length > 0) {
-        const contextMessage = `Previous conversation context: ${context.slice(-3).join(' | ')}`
-        messages.splice(1, 0, { role: 'system', content: contextMessage })
-      }
-
-      const completion = await client.chat.completions.create({
-        model: 'openai/gpt-3.5-turbo',
-        messages,
-        max_tokens: 150,
-        temperature: 0.7,
-        presence_penalty: 0.1,
-        frequency_penalty: 0.1
-      })
-
-      const response = completion.choices[0]?.message?.content || 'I apologize, but I couldn\'t generate a response right now.'
-
-      return {
-        message: response,
-        usage: completion.usage ? {
-          prompt_tokens: completion.usage.prompt_tokens,
-          completion_tokens: completion.usage.completion_tokens,
-          total_tokens: completion.usage.total_tokens
-        } : undefined
-      }
-
     } catch (err) {
-      console.error('OpenAI API error:', err)
+      console.error('Chat generation error:', err)
       error.value = err instanceof Error ? err.message : 'Unknown error occurred'
 
       // Return fallback response
@@ -181,11 +140,11 @@ export function useOpenRouter() {
 
   const checkAPIStatus = async (): Promise<boolean> => {
     try {
-      const client = getOpenRouterClient()
-      if (!client) return false
-
-      // Simple test call
-      await client.models.list()
+      // Test server API availability with a simple request
+      await $fetch('/api/chat', {
+        method: 'POST',
+        body: { message: 'test' }
+      })
       return true
     } catch {
       return false
