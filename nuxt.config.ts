@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@nuxt/image',
+    '@nuxtjs/pwa',
   ],
 
   // CSS
@@ -59,7 +60,8 @@ export default defineNuxtConfig({
   nitro: {
     experimental: {
       wasm: true
-    }
+    },
+    compressPublicAssets: true
   },
 
   // Vite configuration for Three.js
