@@ -12,6 +12,8 @@
             :src="avatarUrl"
             :alt="`${name || 'User'} avatar`"
             loading="lazy"
+            width="200"
+            height="200"
           />
 
           <div v-if="showUserInfo" class="pc-user-info">
@@ -21,6 +23,8 @@
                   :src="miniAvatarUrl || avatarUrl"
                   :alt="`${name || 'User'} mini avatar`"
                   loading="lazy"
+                  width="48"
+                  height="48"
                 />
               </div>
 

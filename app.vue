@@ -26,7 +26,7 @@
       <AppHeader />
 
       <!-- Main Content Area -->
-      <main class="container mx-auto px-4 py-8">
+      <main role="main" class="container mx-auto px-4 py-8">
         <!-- Landing Section -->
         <section
           id="landing"
