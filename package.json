@@ -11,12 +11,10 @@
   },
   "dependencies": {
     "@nuxt/image": "^2.0.0",
-    "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/sitemap": "^7.5.1",
     "@nuxtjs/tailwindcss": "^6.14.0",
     "@pinia/nuxt": "^0.11.3",
     "@types/three": "^0.181.0",
-    "@vite-pwa/nuxt": "^1.1.0",
     "gsap": "^3.13.0",
     "nodemailer": "^7.0.12",
     "nuxt": "^4.2.1",
