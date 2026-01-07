@@ -152,7 +152,9 @@ useHead({
     { property: 'og:type', content: 'website' }
   ],
   link: [
-    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    { rel: 'preload', href: '/profile.png', as: 'image' },
+    { rel: 'dns-prefetch', href: 'https://openrouter.ai' }
   ],
   script: [
     {
