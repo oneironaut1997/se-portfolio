@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { pwa } from './pwa.config'
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
@@ -8,7 +10,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@nuxt/image',
-    '@vite-pwa/nuxt',
+    ['@vite-pwa/nuxt', pwa],
+    '@nuxtjs/sitemap',
   ],
 
   // CSS
@@ -23,6 +26,17 @@ export default defineNuxtConfig({
   image: {
     format: ['webp', 'avif', 'png', 'jpg'],
     quality: 80
+  },
+
+  // Route rules for security headers
+  routeRules: {
+    '/**': {
+      headers: {
+        'X-Frame-Options': 'DENY',
+        'X-Content-Type-Options': 'nosniff',
+        'Referrer-Policy': 'strict-origin-when-cross-origin'
+      }
+    }
   },
 
   // Runtime config for environment variables

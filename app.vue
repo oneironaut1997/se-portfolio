@@ -153,6 +153,33 @@ useHead({
   ],
   link: [
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: 'Sherwin Estrera',
+        jobTitle: 'Full Stack Developer',
+        description: 'Full Stack Developer with 5+ years of experience delivering enterprise-grade web and mobile applications.',
+        url: 'https://se.estrera.com',
+        sameAs: [
+          'https://github.com/oneironaut1997',
+          'https://linkedin.com/in/sherwin-estrera-95601b242'
+        ],
+        knowsAbout: [
+          'JavaScript',
+          'TypeScript',
+          'Vue.js',
+          'Nuxt.js',
+          'Node.js',
+          'Laravel',
+          'Three.js',
+          'AI Integration'
+        ]
+      })
+    }
   ]
 })
 
