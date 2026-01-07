@@ -119,6 +119,8 @@
 </template>
 
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
+
 // Composables
 import { usePortfolioStore } from '~/stores/portfolio'
 import { hyperspeedPresets } from '~/components/hyperspeedPresets'
@@ -131,9 +133,9 @@ import AboutPage from '~/components/AboutPage.vue'
 import ProjectsPage from '~/components/ProjectsPage.vue'
 import SkillsPage from '~/components/SkillsPage.vue'
 import ContactPage from '~/components/ContactPage.vue'
-import ChatInterface from '~/components/ChatInterface.vue'
-import Galaxy from '~/components/Galaxy.vue'
-import Hyperspeed from '~/components/Hyperspeed.vue'
+const ChatInterface = defineAsyncComponent(() => import('~/components/ChatInterface.vue'))
+const Galaxy = defineAsyncComponent(() => import('~/components/Galaxy.vue'))
+const Hyperspeed = defineAsyncComponent(() => import('~/components/Hyperspeed.vue'))
 import SplashCursor from '~/components/SplashCursor.vue'
 
 // Store

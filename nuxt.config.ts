@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
+    '@nuxt/image',
   ],
 
   // CSS
@@ -15,6 +16,12 @@ export default defineNuxtConfig({
   // Tailwind CSS configuration
   tailwindcss: {
     configPath: '~/tailwind.config.js'
+  },
+
+  // Image optimization configuration
+  image: {
+    format: ['webp', 'avif', 'png', 'jpg'],
+    quality: 80
   },
 
   // Runtime config for environment variables

@@ -7,22 +7,20 @@
         <div class="pc-glare" />
 
         <div class="pc-content pc-avatar-content">
-          <img
+          <NuxtImg
             class="avatar"
             :src="avatarUrl"
             :alt="`${name || 'User'} avatar`"
             loading="lazy"
-            @error="handleAvatarError"
           />
 
           <div v-if="showUserInfo" class="pc-user-info">
             <div class="pc-user-details">
               <div class="pc-mini-avatar">
-                <img
+                <NuxtImg
                   :src="miniAvatarUrl || avatarUrl"
                   :alt="`${name || 'User'} mini avatar`"
                   loading="lazy"
-                  @error="handleMiniAvatarError"
                 />
               </div>
 
@@ -232,16 +230,6 @@ const handleContactClick = () => {
   emit('contactClick');
 };
 
-const handleAvatarError = (event: Event) => {
-  const target = event.target as HTMLImageElement;
-  target.style.display = 'none';
-};
-
-const handleMiniAvatarError = (event: Event) => {
-  const target = event.target as HTMLImageElement;
-  target.style.opacity = '0.5';
-  target.src = props.avatarUrl;
-};
 
 onMounted(() => {
   if (!props.enableTilt) return;
