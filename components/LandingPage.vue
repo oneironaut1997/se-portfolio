@@ -30,7 +30,7 @@
           italic
         />
 
-        <ShinyText text="Creating immersive web experiences with cutting-edge technologies." className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed" />
+        <ShinyText :text="tagline" className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed" />
       </div>
 
       <!-- CTA Buttons -->
@@ -82,6 +82,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { usePortfolioStore } from '~/stores/portfolio'
 import TextPressure from '~/components/TextPressure.vue'
 import ShinyText from '~/components/ShinyText.vue'
@@ -89,6 +90,20 @@ import TextType from '~/components/TextType.vue'
 
 // Store
 const portfolioStore = usePortfolioStore()
+
+// Computed
+const tagline = computed(() => {
+  const categories = [...new Set(portfolioStore.projects.map(p => p.category))]
+  const categoryNames: Record<string, string> = {
+    ecommerce: 'e-commerce',
+    booking: 'hospitality',
+    fintech: 'finance',
+    healthcare: 'healthcare',
+    enterprise: 'enterprise'
+  }
+  const names = categories.map(cat => categoryNames[cat as keyof typeof categoryNames] || cat)
+  return `Full-Stack Developer specializing in web solutions for ${names.join(', ')}`
+})
 
 // Methods
 const navigateTo = (section: string) => {
