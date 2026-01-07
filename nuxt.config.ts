@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { pwa } from './pwa.config'
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -10,7 +9,6 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@nuxt/image',
-    // ['@vite-pwa/nuxt', pwa], // Temporarily disabled
     '@nuxtjs/sitemap',
   ],
 
