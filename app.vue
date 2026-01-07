@@ -89,6 +89,7 @@
       @click="portfolioStore.toggleChat"
       class="fixed bottom-6 right-6 z-40 w-14 h-14 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 flex items-center justify-center"
       :class="{ 'translate-y-16': portfolioStore.showChat }"
+      aria-label="Toggle chat interface"
     >
       <svg
         class="w-6 h-6"
@@ -143,6 +144,9 @@ const portfolioStore = usePortfolioStore()
 
 // Page metadata
 useHead({
+  htmlAttrs: {
+    lang: 'en'
+  },
   title: 'Sherwin Estrera - Full Stack Developer ',
   meta: [
     { name: 'description', content: 'Immersive portfolio showcasing full-stack development skills with 3D graphics, AI integration, and cinematic animations.' },

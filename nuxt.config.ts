@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@nuxt/image',
-    ['@vite-pwa/nuxt', pwa],
+    // ['@vite-pwa/nuxt', pwa], // Temporarily disabled
     '@nuxtjs/sitemap',
   ],
 
@@ -35,7 +35,7 @@ export default defineNuxtConfig({
         'X-Frame-Options': 'DENY',
         'X-Content-Type-Options': 'nosniff',
         'Referrer-Policy': 'strict-origin-when-cross-origin',
-        'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://openrouter.ai https://api.openrouter.ai; frame-src 'self' https://www.google.com;"
+        'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data: https://res.cloudinary.com; connect-src 'self' https://openrouter.ai https://api.openrouter.ai; frame-src 'self' https://www.google.com;"
       }
     }
   },
