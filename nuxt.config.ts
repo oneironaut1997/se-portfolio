@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@nuxt/image',
-    '@nuxtjs/pwa',
+    '@vite-pwa/nuxt',
   ],
 
   // CSS
