@@ -102,7 +102,7 @@ const tagline = computed(() => {
     enterprise: 'enterprise'
   }
   const names = categories.map(cat => categoryNames[cat as keyof typeof categoryNames] || cat)
-  return `Full-Stack Developer specializing in web solutions for ${names.join(', ')}`
+  return `Passionate Full-Stack Developer specializing in innovative web solutions for ${names.join(', ')} industries`
 })
 
 // Methods
