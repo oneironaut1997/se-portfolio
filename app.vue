@@ -129,15 +129,16 @@ import { hyperspeedPresets } from '~/components/hyperspeedPresets'
 // Components
 import AppHeader from '~/components/AppHeader.vue'
 import AppFooter from '~/components/AppFooter.vue'
-import LandingPage from '~/components/LandingPage.vue'
-import AboutPage from '~/components/AboutPage.vue'
-import ProjectsPage from '~/components/ProjectsPage.vue'
-import SkillsPage from '~/components/SkillsPage.vue'
-import ContactPage from '~/components/ContactPage.vue'
+
+const LandingPage = defineAsyncComponent(() => import('~/components/LandingPage.vue'))
+const AboutPage = defineAsyncComponent(() => import('~/components/AboutPage.vue'))
+const ProjectsPage = defineAsyncComponent(() => import('~/components/ProjectsPage.vue'))
+const SkillsPage = defineAsyncComponent(() => import('~/components/SkillsPage.vue'))
+const ContactPage = defineAsyncComponent(() => import('~/components/ContactPage.vue'))
 const ChatInterface = defineAsyncComponent(() => import('~/components/ChatInterface.vue'))
 const Galaxy = defineAsyncComponent(() => import('~/components/Galaxy.vue'))
 const Hyperspeed = defineAsyncComponent(() => import('~/components/Hyperspeed.vue'))
-import SplashCursor from '~/components/SplashCursor.vue'
+const SplashCursor = defineAsyncComponent(() => import('~/components/SplashCursor.vue'))
 
 // Store
 const portfolioStore = usePortfolioStore()

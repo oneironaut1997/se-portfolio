@@ -59,7 +59,8 @@ export default defineNuxtConfig({
 
   // Build configuration
   build: {
-    transpile: ['three']
+    transpile: ['three'],
+    sourcemap: true
   },
 
   // TypeScript configuration
@@ -76,7 +77,15 @@ export default defineNuxtConfig({
     experimental: {
       wasm: true
     },
-    compressPublicAssets: true
+    compressPublicAssets: true,
+    serveStatic: true,
+    publicAssets: [
+      {
+        baseURL: '/',
+        dir: '.output/public',
+        maxAge: 60 * 60 * 24 * 365 // 1 year
+      }
+    ]
   },
 
   // Vite configuration for Three.js
@@ -85,6 +94,7 @@ export default defineNuxtConfig({
       include: ['three']
     },
     build: {
+      sourcemap: true,
       rollupOptions: {
         output: {
           manualChunks: {
