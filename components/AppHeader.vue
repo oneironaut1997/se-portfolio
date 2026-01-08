@@ -4,7 +4,7 @@
       <div class="flex items-center justify-between">
         <!-- Logo/Brand -->
         <div class="flex items-center space-x-2 cursor-pointer" @click="navigateTo('landing')">
-          <img :src="miniAvatarUrl" alt="Logo" class="w-8 h-8 rounded-lg object-cover" style="filter: grayscale(100%)" />
+          <NuxtImg :src="miniAvatarUrl" alt="Logo" class="w-8 h-8 rounded-lg object-cover" style="filter: grayscale(100%)" />
           <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Sherwin Estrera
           </span>

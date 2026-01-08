@@ -10,7 +10,13 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxt/image',
     '@nuxtjs/sitemap',
+    'nuxt-gtag',
   ],
+
+  // GTag configuration
+  gtag: {
+    id: 'G-9FQEPSSTL6'
+  },
 
   // CSS
   css: ['~/assets/css/main.css'],
@@ -23,7 +29,8 @@ export default defineNuxtConfig({
   // Image optimization configuration
   image: {
     format: ['webp', 'avif', 'png', 'jpg'],
-    quality: 80
+    quality: 80,
+    provider: 'none'
   },
 
   // Route rules for security headers
@@ -33,7 +40,7 @@ export default defineNuxtConfig({
         'X-Frame-Options': 'DENY',
         'X-Content-Type-Options': 'nosniff',
         'Referrer-Policy': 'strict-origin-when-cross-origin',
-        'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data: https://res.cloudinary.com; connect-src 'self' https://openrouter.ai https://api.openrouter.ai; frame-src 'self' https://www.google.com;"
+        'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data: https://res.cloudinary.com; connect-src 'self' https://openrouter.ai https://api.openrouter.ai https://www.google-analytics.com; frame-src 'self' https://www.google.com;"
       }
     }
   },
@@ -68,7 +75,8 @@ export default defineNuxtConfig({
   },
 
   // SSR configuration
-  ssr: true,
+  ssr: false,
+  target: 'static',
 
   // Nitro configuration for API routes
   nitro: {

@@ -5,7 +5,7 @@
         <!-- Brand Section -->
         <div class="space-y-4">
           <div class="flex items-center space-x-2">
-            <img :src="miniAvatarUrl" alt="Logo" class="w-8 h-8 rounded-lg object-cover" style="filter: grayscale(100%)" />
+            <NuxtImg :src="miniAvatarUrl" alt="Logo" class="w-8 h-8 rounded-lg object-cover" style="filter: grayscale(100%)" />
             <span class="text-lg font-bold text-white">Sherwin Estrera</span>
           </div>
           <p class="text-gray-300 text-sm leading-relaxed">
