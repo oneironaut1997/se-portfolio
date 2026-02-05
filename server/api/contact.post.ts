@@ -43,18 +43,20 @@ export default defineEventHandler(async (event) => {
   try {
     // Send email to site owner
     await transporter.sendMail({
-      from: `"${name}" <${email}>`,
+      // from: `"${name}" <${email}>`,
+      from: config.smtpFromAddress,
       replyTo: email,
       to: config.smtpFromAddress,
       subject: `Contact Form: ${subject}`,
-      text: `From: ${name} <${email}>\n\n${message}`,
+      text: `From: ${name}`,
       html: `
  <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
    <div style="background: #f8f9fa; padding: 20px; border-bottom: 1px solid #e0e0e0;">
      <h2 style="color: #333; margin: 0; font-size: 20px;">New Contact Form Submission</h2>
    </div>
    <div style="padding: 20px;">
-     <p style="margin: 0 0 10px 0;"><strong>From:</strong> ${name} <${email}></p>
+     <p style="margin: 0 0 10px 0;"><strong>Name:</strong> ${name}</p>
+     <p style="margin: 0 0 10px 0;"><strong>Email:</strong> ${email}</p>
      <p style="line-height: 1.6; margin: 0;">${message.replace(/\n/g, '<br>')}</p>
    </div>
  </div>
