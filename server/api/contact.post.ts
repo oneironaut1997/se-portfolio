@@ -1,6 +1,18 @@
 import nodemailer from 'nodemailer'
 
 export default defineEventHandler(async (event) => {
+  // CORS headers
+  setResponseHeaders(event, {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type'
+  })
+
+  // Handle preflight
+  if (event.method === 'OPTIONS') {
+    return { ok: true }
+  }
+  
   const config = useRuntimeConfig()
   const body = await readBody(event)
   const { name, email, subject, message, recaptchaResponse } = body

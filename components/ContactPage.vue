@@ -268,7 +268,7 @@ const submitForm = async () => {
   submitStatus.value = null
 
   try {
-    const res = await fetch('/api/contact', {
+    const res = await fetch(`${config.public.apiBaseUrl}/api/contact`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...form.value, recaptchaResponse: recaptchaResponse.value })
