@@ -8,8 +8,56 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Sherwin Estrera - Portfolio',
+      titleTemplate: '%s | Full Stack Developer',
+      htmlAttrs: {
+        lang: 'en'
+      },
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'description', content: 'Sherwin Estrera - Full Stack Developer specializing in Vue.js, Nuxt, Node.js, and modern web technologies. View my portfolio, projects, and skills.' },
+        { name: 'keywords', content: 'Sherwin Estrera, Full Stack Developer, Vue.js, Nuxt, Node.js, TypeScript, Portfolio, Web Developer, Philippines' },
+        { name: 'author', content: 'Sherwin Estrera' },
+        { name: 'robots', content: 'index, follow' },
+        { name: 'theme-color', content: '#0f172a' },
+        
+        // Open Graph / Facebook
+        { property: 'og:type', content: 'website' },
+        { property: 'og:url', content: 'https://sherwinestrera.com/' },
+        { property: 'og:title', content: 'Sherwin Estrera - Full Stack Developer Portfolio' },
+        { property: 'og:description', content: 'Full Stack Developer specializing in Vue.js, Nuxt, Node.js, and modern web technologies.' },
+        { property: 'og:image', content: 'https://sherwinestrera.com/profile.png' },
+        
+        // Twitter
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:site', content: '@sherwinestrera' },
+        { name: 'twitter:creator', content: '@sherwinestrera' },
+        { name: 'twitter:title', content: 'Sherwin Estrera - Full Stack Developer Portfolio' },
+        { name: 'twitter:description', content: 'Full Stack Developer specializing in Vue.js, Nuxt, Node.js, and modern web technologies.' },
+        { name: 'twitter:image', content: 'https://sherwinestrera.com/profile.png' }
+      ],
       link: [
-        { rel: 'icon', type: 'image/png', href: '/profile.png' }
+        { rel: 'icon', type: 'image/png', href: '/profile.png' },
+        { rel: 'canonical', href: 'https://sherwinestrera.com/' },
+        { rel: 'alternate', type: 'application/rss+xml', title: 'RSS Feed', href: '/rss.xml' }
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Person',
+            name: 'Sherwin Estrera',
+            jobTitle: 'Full Stack Developer',
+            url: 'https://sherwinestrera.com/',
+            sameAs: [
+              'https://github.com/sherwinestrera',
+              'https://linkedin.com/in/sherwinestrera'
+            ],
+            description: 'Full Stack Developer specializing in Vue.js, Nuxt, Node.js, and modern web technologies.',
+            image: 'https://sherwinestrera.com/profile.png'
+          })
+        }
       ]
     }
   },
@@ -22,6 +70,36 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     'nuxt-gtag',
   ],
+
+  // Sitemap configuration for SEO
+  site: {
+    url: 'https://sherwinestrera.com/',
+    name: 'Sherwin Estrera Portfolio',
+    description: 'Full Stack Developer Portfolio specializing in Vue.js, Nuxt, Node.js',
+    defaultLocale: 'en'
+  },
+  sitemap: {
+    sources: [],
+    credits: false,
+    gzip: true,
+    include: ['/'],
+    exclude: ['/api/**', '/rss.xml'],
+    routes: async () => {
+      return [
+        '/',
+        '/#about',
+        '/#projects',
+        '/#skills',
+        '/#contact'
+      ]
+    },
+    sitemap: {
+      hostname: 'https://sherwinestrera.com/',
+      lastmod: new Date().toISOString().split('T')[0],
+      changefreq: 'weekly',
+      priority: 1.0
+    }
+  },
 
   // GTag configuration
   gtag: {

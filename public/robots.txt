@@ -1,2 +1,14 @@
-User-Agent: *
-Disallow:
+# Robots.txt for Sherwin Estrera Portfolio
+# Optimized for SEO
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://sherwinestrera.com/sitemap.xml
+
+# Crawl-delay (optional, only if needed)
+# Crawl-delay: 10
+
+# Host preference (for www vs non-www)
+Host: https://sherwinestrera.com/
