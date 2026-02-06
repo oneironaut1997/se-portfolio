@@ -4,6 +4,16 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
+  // App configuration
+  app: {
+    head: {
+      title: 'Sherwin Estrera - Portfolio',
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/profile.png' }
+      ]
+    }
+  },
+
   // Modules
   modules: [
     '@nuxtjs/tailwindcss',
