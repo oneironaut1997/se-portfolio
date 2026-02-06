@@ -15,30 +15,30 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Sherwin Estrera - Full Stack Developer specializing in Vue.js, Nuxt, Node.js, and modern web technologies. View my portfolio, projects, and skills.' },
-        { name: 'keywords', content: 'Sherwin Estrera, Full Stack Developer, Vue.js, Nuxt, Node.js, TypeScript, Portfolio, Web Developer, Philippines' },
+        { name: 'description', content: 'Sherwin Estrera - Full Stack Developer specializing in Laravel, PHP, Vue.js, Nuxt, Node.js, and modern web technologies. View my portfolio, projects, and skills.' },
+        { name: 'keywords', content: 'Sherwin Estrera, Full Stack Developer, Laravel, PHP, Vue.js, Nuxt, Node.js, TypeScript, Portfolio, Web Developer, Philippines' },
         { name: 'author', content: 'Sherwin Estrera' },
         { name: 'robots', content: 'index, follow' },
         { name: 'theme-color', content: '#0f172a' },
         
         // Open Graph / Facebook
         { property: 'og:type', content: 'website' },
-        { property: 'og:url', content: 'https://sherwinestrera.com/' },
+        { property: 'og:url', content: 'https://sherwin.estrera.online/' },
         { property: 'og:title', content: 'Sherwin Estrera - Full Stack Developer Portfolio' },
-        { property: 'og:description', content: 'Full Stack Developer specializing in Vue.js, Nuxt, Node.js, and modern web technologies.' },
-        { property: 'og:image', content: 'https://sherwinestrera.com/profile.png' },
+        { property: 'og:description', content: 'Full Stack Developer specializing in Laravel, PHP, Vue.js, Nuxt, Node.js, and modern web technologies.' },
+        { property: 'og:image', content: 'https://sherwin.estrera.online/profile.png' },
         
         // Twitter
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:site', content: '@sherwinestrera' },
         { name: 'twitter:creator', content: '@sherwinestrera' },
         { name: 'twitter:title', content: 'Sherwin Estrera - Full Stack Developer Portfolio' },
-        { name: 'twitter:description', content: 'Full Stack Developer specializing in Vue.js, Nuxt, Node.js, and modern web technologies.' },
-        { name: 'twitter:image', content: 'https://sherwinestrera.com/profile.png' }
+        { name: 'twitter:description', content: 'Full Stack Developer specializing in Laravel, PHP, Vue.js, Nuxt, Node.js, and modern web technologies.' },
+        { name: 'twitter:image', content: 'https://sherwin.estrera.online/profile.png' }
       ],
       link: [
         { rel: 'icon', type: 'image/png', href: '/profile.png' },
-        { rel: 'canonical', href: 'https://sherwinestrera.com/' },
+        { rel: 'canonical', href: 'https://sherwin.estrera.online/' },
         { rel: 'alternate', type: 'application/rss+xml', title: 'RSS Feed', href: '/rss.xml' }
       ],
       script: [
@@ -49,13 +49,13 @@ export default defineNuxtConfig({
             '@type': 'Person',
             name: 'Sherwin Estrera',
             jobTitle: 'Full Stack Developer',
-            url: 'https://sherwinestrera.com/',
+            url: 'https://sherwin.estrera.online/',
             sameAs: [
-              'https://github.com/sherwinestrera',
-              'https://linkedin.com/in/sherwinestrera'
+              'https://github.com/oneironaut1997',
+              'https://www.linkedin.com/in/sherwin-estrera-95601b242'
             ],
-            description: 'Full Stack Developer specializing in Vue.js, Nuxt, Node.js, and modern web technologies.',
-            image: 'https://sherwinestrera.com/profile.png'
+            description: 'Full Stack Developer specializing in Laravel, PHP, Vue.js, Nuxt, Node.js, and modern web technologies.',
+            image: 'https://sherwin.estrera.online/profile.png'
           })
         }
       ]
@@ -73,7 +73,7 @@ export default defineNuxtConfig({
 
   // Sitemap configuration for SEO
   site: {
-    url: 'https://sherwinestrera.com/',
+    url: 'https://sherwin.estrera.online/',
     name: 'Sherwin Estrera Portfolio',
     description: 'Full Stack Developer Portfolio specializing in Vue.js, Nuxt, Node.js',
     defaultLocale: 'en'
@@ -94,7 +94,7 @@ export default defineNuxtConfig({
       ]
     },
     sitemap: {
-      hostname: 'https://sherwinestrera.com/',
+      hostname: 'https://sherwin.estrera.online/',
       lastmod: new Date().toISOString().split('T')[0],
       changefreq: 'weekly',
       priority: 1.0
