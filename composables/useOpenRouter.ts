@@ -1,4 +1,7 @@
 import { ref, readonly } from 'vue'
+import { useRuntimeConfig } from '#imports'
+
+const config = useRuntimeConfig()
 
 export interface ChatResponse {
   message: string
@@ -63,7 +66,8 @@ export function useOpenRouter() {
 
       // For more complex queries, use server-side API
       try {
-        const response = await $fetch('/api/chat', {
+        // const response = await $fetch('/api/chat', {
+        const response = await $fetch(`${config.public.apiBaseUrl}/api/chat`, {
           method: 'POST',
           body: { message: userMessage, context }
         })
