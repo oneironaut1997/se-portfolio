@@ -44,6 +44,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
   const showChat = ref(false)
   const particleSystemActive = ref(false)
   const animationsEnabled = ref(true)
+  const visualEffectsEnabled = ref(true)
   const backgroundEffect = ref<'particles' | 'galaxy'>('galaxy')
   const isTransitioning = ref(false)
   const transitionProgress = ref(0)
@@ -73,6 +74,14 @@ export const usePortfolioStore = defineStore('portfolio', () => {
   const setCurrentSection = (section: Section) => {
     if (currentSection.value !== section) {
       previousSection.value = currentSection.value
+      
+      // If visual effects are disabled, skip transition animation
+      if (!visualEffectsEnabled.value) {
+        currentSection.value = section
+        chatContext.value.userProfile.currentSection = section
+        return
+      }
+      
       isTransitioning.value = true
       transitionProgress.value = 0
       currentSection.value = section
@@ -133,6 +142,15 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     animationsEnabled.value = !animationsEnabled.value
   }
 
+  const toggleVisualEffects = () => {
+    visualEffectsEnabled.value = !visualEffectsEnabled.value
+    // If disabling visual effects, reset any ongoing transition
+    if (!visualEffectsEnabled.value) {
+      isTransitioning.value = false
+      transitionProgress.value = 0
+    }
+  }
+
   const setLoading = (loading: boolean) => {
     isLoading.value = loading
   }
@@ -159,6 +177,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     showChat,
     particleSystemActive,
     animationsEnabled,
+    visualEffectsEnabled,
     backgroundEffect,
     isTransitioning,
     transitionProgress,
@@ -176,6 +195,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     toggleChat,
     toggleParticles,
     toggleAnimations,
+    toggleVisualEffects,
     setLoading,
     setError,
     setBackgroundEffect

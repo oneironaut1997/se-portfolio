@@ -2,7 +2,7 @@
   <div id="app" class="min-h-screen bg-gray-900 text-white relative overflow-hidden">
     <!-- Galaxy Background -->
     <Galaxy
-      v-if="portfolioStore.backgroundEffect === 'galaxy'"
+      v-if="portfolioStore.backgroundEffect === 'galaxy' && portfolioStore.visualEffectsEnabled"
       :speed="1 + 2 * Math.sin(portfolioStore.transitionProgress * Math.PI)"
       :star-speed="0.5 + 1 * Math.sin(portfolioStore.transitionProgress * Math.PI)"
       :rotation-speed="0.1 + 0.2 * Math.sin(portfolioStore.transitionProgress * Math.PI)"
@@ -10,7 +10,7 @@
 
     <!-- Hyperspeed Effect -->
     <div
-      v-show="portfolioStore.isTransitioning"
+      v-show="portfolioStore.isTransitioning && portfolioStore.visualEffectsEnabled"
       :style="{ opacity: Math.sin(portfolioStore.transitionProgress * Math.PI) }"
       class="transition-opacity duration-75"
     >
@@ -18,7 +18,7 @@
     </div>
 
     <!-- Splash Cursor Effect -->
-    <SplashCursor />
+    <SplashCursor v-if="portfolioStore.visualEffectsEnabled" />
 
     <!-- Main Content -->
     <div class="relative z-10">
@@ -103,6 +103,22 @@
           stroke-width="2"
           d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
         />
+      </svg>
+    </button>
+
+    <!-- Visual Effects Toggle Button -->
+    <button
+      @click="portfolioStore.toggleVisualEffects"
+      class="fixed bottom-6 right-24 z-40 w-14 h-14 bg-purple-600 hover:bg-purple-700 rounded-full shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 flex items-center justify-center"
+      :class="{ 'opacity-50': !portfolioStore.visualEffectsEnabled }"
+      :aria-label="portfolioStore.visualEffectsEnabled ? 'Disable visual effects' : 'Enable visual effects'"
+      :title="portfolioStore.visualEffectsEnabled ? 'Disable visual effects' : 'Enable visual effects'"
+    >
+      <svg v-if="portfolioStore.visualEffectsEnabled" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+      <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
       </svg>
     </button>
 
