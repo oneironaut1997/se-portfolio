@@ -217,6 +217,7 @@ const targetMousePos = ref({ x: 0.5, y: 0.5 });
 const smoothMousePos = ref({ x: 0.5, y: 0.5 });
 const targetMouseActive = ref(0.0);
 const smoothMouseActive = ref(0.0);
+const isVisible = ref(true);
 
 let renderer: Renderer;
 let program: Program;
@@ -224,11 +225,14 @@ let mesh: Mesh;
 let animateId: number;
 let handleMouseMove: ((event: MouseEvent) => void) | null = null;
 let handleMouseLeave: (() => void) | null = null;
+let visibilityObserver: IntersectionObserver | null = null;
 
 function resize() {
   if (!ctnDom.value || !renderer || !program) return;
   const scale = 1;
-  renderer.setSize(ctnDom.value.offsetWidth * scale, ctnDom.value.offsetHeight * scale);
+  // Limit pixel ratio to max 2 for better performance on high-DPI displays
+  const pixelRatio = Math.min(window.devicePixelRatio, 2);
+  renderer.setSize(ctnDom.value.offsetWidth * scale * pixelRatio, ctnDom.value.offsetHeight * scale * pixelRatio);
   program.uniforms.uResolution.value = new Color(
     renderer.gl.canvas.width,
     renderer.gl.canvas.height,
@@ -239,6 +243,12 @@ function resize() {
 function update(t: number) {
   if (!program) return;
   animateId = requestAnimationFrame(update);
+  
+  // Skip rendering when component is not visible to save CPU
+  if (!isVisible.value) {
+    return;
+  }
+  
   if (!props.disableAnimation) {
     program.uniforms.uTime.value = t * 0.001;
     program.uniforms.uStarSpeed.value = (t * 0.001 * props.starSpeed) / 10.0;
@@ -309,6 +319,16 @@ onMounted(() => {
   window.addEventListener('resize', resize, false);
   resize();
 
+  // Set up IntersectionObserver to pause animation when component is off-screen
+  if (typeof IntersectionObserver !== 'undefined') {
+    visibilityObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isVisible.value = entry.isIntersecting;
+      });
+    }, { threshold: 0 });
+    visibilityObserver.observe(ctn);
+  }
+
   animateId = requestAnimationFrame(update);
   ctn.appendChild(gl.canvas);
 
@@ -341,6 +361,9 @@ onUnmounted(() => {
     window.removeEventListener('mouseleave', handleMouseLeave);
   }
   window.removeEventListener('resize', resize);
+  if (visibilityObserver) {
+    visibilityObserver.disconnect();
+  }
   if (ctnDom.value && renderer) {
     ctnDom.value.removeChild(renderer.gl.canvas);
   }

@@ -70,6 +70,10 @@ const props = withDefaults(defineProps<HyperspeedProps>(), {
 
 const hyperspeed = ref<HTMLDivElement>();
 const appRef = ref<App | null>(null);
+const isVisible = ref(true);
+
+// Detect if running on mobile for quality adjustments
+const isMobile = typeof window !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
 const defaultOptions: HyperspeedOptions = {
   onSpeedUp: () => {},
@@ -948,6 +952,7 @@ class App {
   speedUpTarget: number;
   speedUp: number;
   timeOffset: number;
+  isVisible: boolean;
 
   constructor(container: HTMLElement, options: HyperspeedOptions) {
     this.options = options;
@@ -963,8 +968,10 @@ class App {
       antialias: false,
       alpha: true
     });
+    // Limit pixel ratio to max 2 for better performance on high-DPI displays
+    const pixelRatio = Math.min(window.devicePixelRatio, 2);
     this.renderer.setSize(container.offsetWidth, container.offsetHeight, false);
-    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setPixelRatio(pixelRatio);
 
     this.composer = new EffectComposer(this.renderer);
     container.appendChild(this.renderer.domElement);
@@ -1011,6 +1018,7 @@ class App {
     this.speedUpTarget = 0;
     this.speedUp = 0;
     this.timeOffset = 0;
+    this.isVisible = true;
 
     this.tick = this.tick.bind(this);
     this.init = this.init.bind(this);
@@ -1036,16 +1044,20 @@ class App {
 
   initPasses() {
     this.renderPass = new RenderPass(this.scene, this.camera);
+    
+    // Reduce bloom quality on mobile for better performance
+    const bloomResolution = isMobile ? 0.5 : 1;
     this.bloomPass = new EffectPass(
       this.camera,
       new BloomEffect({
         luminanceThreshold: 0.2,
         luminanceSmoothing: 0,
-        resolutionScale: 1
+        resolutionScale: bloomResolution
       })
     );
 
-    const smaaPass = new EffectPass(
+    // Disable SMAA on mobile as it's very expensive
+    const smaaPass = isMobile ? null : new EffectPass(
       this.camera,
       new SMAAEffect({
         preset: SMAAPreset.MEDIUM
@@ -1053,11 +1065,15 @@ class App {
     );
     this.renderPass.renderToScreen = false;
     this.bloomPass.renderToScreen = false;
-    smaaPass.renderToScreen = true;
+    if (smaaPass) {
+      smaaPass.renderToScreen = true;
+      this.composer.addPass(smaaPass);
+    } else {
+      this.bloomPass.renderToScreen = true;
+    }
 
     this.composer.addPass(this.renderPass);
     this.composer.addPass(this.bloomPass);
-    this.composer.addPass(smaaPass);
   }
 
   loadAssets(): Promise<void> {
@@ -1204,6 +1220,10 @@ class App {
       this.container.removeEventListener('contextmenu', this.onContextMenu);
     }
   }
+  
+  setVisible(visible: boolean) {
+    this.isVisible = visible;
+  }
 
   setSize(width: number, height: number, updateStyles: boolean) {
     this.composer.setSize(width, height, updateStyles);
@@ -1211,6 +1231,13 @@ class App {
 
   tick() {
     if (this.disposed || !this) return;
+    
+    // Skip rendering when not visible to save CPU
+    if (!this.isVisible) {
+      requestAnimationFrame(this.tick);
+      return;
+    }
+    
     if (resizeRendererToDisplaySize(this.renderer, this.setSize)) {
       const canvas = this.renderer.domElement;
       this.camera.aspect = canvas.clientWidth / canvas.clientHeight;
@@ -1241,6 +1268,15 @@ onMounted(() => {
     ...defaultOptions,
     ...props.effectOptions
   };
+  
+  // Reduce light pairs and sticks on mobile for better performance
+  if (isMobile && !props.effectOptions.lightPairsPerRoadWay) {
+    mergedOptions.lightPairsPerRoadWay = 20;
+  }
+  if (isMobile && !props.effectOptions.totalSideLightSticks) {
+    mergedOptions.totalSideLightSticks = 10;
+  }
+  
   const options = { ...mergedOptions };
   if (typeof options.distortion === 'string') {
     options.distortion = distortions[options.distortion];
@@ -1248,6 +1284,17 @@ onMounted(() => {
 
   const myApp = new App(container, options);
   appRef.value = myApp;
+  
+  // Set up IntersectionObserver to pause animation when off-screen
+  if (typeof IntersectionObserver !== 'undefined') {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        myApp.setVisible(entry.isIntersecting);
+      });
+    }, { threshold: 0 });
+    observer.observe(container);
+  }
+  
   myApp.loadAssets().then(myApp.init);
 });
 
